@@ -5,13 +5,14 @@ on:
       - master
 
 jobs:
-  release-please:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
 
     steps:
       - name: Release Please
@@ -21,8 +22,8 @@ jobs:
           release-type: python
 
   publish:
-    needs: release-please
-    if: ${{ needs.release-please.outputs.release_created }}
+    needs: release
+    if: ${{ needs.release.outputs.release_created }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -53,8 +54,8 @@ jobs:
           password: ${{ secrets.PYPI_API_TOKEN }}
 
   upload:
-    needs: release-please
-    if: ${{ needs.release-please.outputs.release_created }}
+    needs: release
+    if: ${{ needs.release.outputs.release_created }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -85,6 +86,6 @@ jobs:
           os=${{ matrix.os }}
           filename=${os%-*}.zip
           zip -r $filename diffused
-          gh release upload ${{ needs.release-please.outputs.tag_name }} $filename
+          gh release upload ${{ needs.release.outputs.tag_name }} $filename
         env:
           GH_TOKEN: ${{ github.token }}
