@@ -1,5 +1,6 @@
 [project]
 name = "diffused"
+version = "0.1.0"
 authors = [
     { name="Mark", email="mark@remarkablemark.org" },
 ]
@@ -12,7 +13,6 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
-dynamic = ["version"]
 dependencies = [
     "accelerate>=1.5.0",
     "diffusers>=0.32.0",
