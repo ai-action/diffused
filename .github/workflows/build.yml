@@ -1,0 +1,30 @@
+name: build
+on: [push, pull_request]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          cache: pip
+          python-version: 3
+
+      - name: Install pdoc
+        run: pip install pdoc
+
+      - name: Build docs
+        run: pdoc src/python_cli_template/ -o docs
+
+      - name: Deploy
+        if: github.ref_name == 'master'
+        uses: remarkablemark/gitploy-action@v1
+        with:
+          directory: docs

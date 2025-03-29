@@ -1,0 +1,30 @@
+name: lint
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          cache: pip
+          python-version: 3
+
+      - name: Install dependencies
+        run: pip install -e .[test]
+
+      - name: Run Black
+        run: black --check .
+
+      - name: Run Ruff
+        run: ruff check
+
+      - name: Run pre-commit
+        run: pre-commit run --all-files

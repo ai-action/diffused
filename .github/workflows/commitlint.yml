@@ -1,0 +1,14 @@
+name: commitlint
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Commitlint
+        uses: remarkablemark/commitlint@v1
+        with:
+          checkout: true

@@ -1,0 +1,60 @@
+name: test
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          cache: pip
+          python-version: 3
+
+      - name: Install dependencies
+        run: pip install -e .[test]
+
+      - name: Run tests and collect coverage
+        run: |
+          coverage run -m pytest
+          coverage report
+          coverage xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          cache: pip
+          python-version: 3
+
+      - name: Install package
+        run: pipx install .
+
+      - name: Check version
+        run: |
+          version=$(grep version src/python_cli_template/__init__.py | cut -d'"' -f 2)
+          set -e
+          [[ $(python_cli_template --version) == $version ]]
+          [[ $(python_cli_template -v) == $version ]]
+
+      - name: Get help
+        run: python_cli_template --help
+
+      - name: Execute CLI
+        run: python_cli_template --name test
