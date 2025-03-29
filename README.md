@@ -12,25 +12,6 @@ diffused <model> <prompt>
 
 ## Quick Start
 
-```sh
-pipx run diffused segmind/tiny-sd "an apple"
-```
-
-## Prerequisites
-
-- [Python](https://www.python.org/)
-- [pipx](https://pipx.pypa.io/)
-
-## Install
-
-[Python](https://pypi.org/project/diffused/):
-
-```sh
-pipx install diffused
-```
-
-## Usage
-
 Generate image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
 
 ```sh
@@ -43,9 +24,28 @@ Generate image with [model](https://huggingface.co/OFA-Sys/small-stable-diffusio
 diffused OFA-Sys/small-stable-diffusion-v0 "cartoon of a cat" --output cat.png
 ```
 
-## Arguments
+## Prerequisites
 
-### model
+- [Python](https://www.python.org/)
+- [pipx](https://pipx.pypa.io/)
+
+## Install
+
+CLI:
+
+```sh
+pipx install diffused
+```
+
+Package:
+
+```sh
+pip install diffused
+```
+
+## CLI
+
+### `model`
 
 **Required**: Text-to-image diffusion [model](https://huggingface.co/models?pipeline_tag=text-to-image).
 
@@ -53,7 +53,7 @@ diffused OFA-Sys/small-stable-diffusion-v0 "cartoon of a cat" --output cat.png
 diffused segmind/SSD-1B "An astronaut riding a green horse"
 ```
 
-### prompt
+### `prompt`
 
 **Required**: Text prompt.
 
@@ -61,7 +61,7 @@ diffused segmind/SSD-1B "An astronaut riding a green horse"
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eating sushi with a cat in a izakaya, 35mm photograph, film, professional, 4k, highly detailed"
 ```
 
-### --output
+### `--output`
 
 **Optional**: Generated image filename.
 
@@ -73,16 +73,28 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output cat.j
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o cat.jpg
 ```
 
-### --version
+### `--version`
 
 ```sh
 diffused --version # diffused -v
 ```
 
-### --help
+### `--help`
 
 ```sh
 diffused --help # diffused -h
+```
+
+## Package
+
+Generate image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
+
+```py
+# script.py
+from diffused import generate
+
+image = generate(model="segmind/tiny-sd", prompt="apple")
+image.save("apple.png")
 ```
 
 ## License
