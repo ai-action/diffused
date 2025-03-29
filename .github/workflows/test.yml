@@ -37,6 +37,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Cache models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/
+          key: ${{ runner.os }}-huggingface
+
       - name: Use Python
         uses: actions/setup-python@v5
         with:
@@ -48,13 +54,22 @@ jobs:
 
       - name: Check version
         run: |
-          version=$(grep version src/python_cli_template/__init__.py | cut -d'"' -f 2)
+          version=$(grep version src/diffused/__init__.py | cut -d'"' -f 2)
           set -e
-          [[ $(python_cli_template --version) == $version ]]
-          [[ $(python_cli_template -v) == $version ]]
+          [[ $(diffused --version) == $version ]]
+          [[ $(diffused -v) == $version ]]
 
       - name: Get help
-        run: python_cli_template --help
+        run: diffused --help
 
-      - name: Execute CLI
-        run: python_cli_template --name test
+      - name: Generate image
+        run: diffused segmind/tiny-sd "an apple"
+        env:
+          DISABLE_TELEMETRY: YES
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact
+          path: |
+            *.png
