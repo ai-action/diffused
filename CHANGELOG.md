@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/ai-action/diffused/compare/v0.1.3...v0.1.4) (2025-03-29)
+
+
+### Bug Fixes
+
+* **github:** add release tag name to outputs in release-please.yml ([3ee0b15](https://github.com/ai-action/diffused/commit/3ee0b157165c9db88cf37a8e4a366d9146707823))
+
 ## [0.1.3](https://github.com/ai-action/diffused/compare/v0.1.2...v0.1.3) (2025-03-29)
 
 
