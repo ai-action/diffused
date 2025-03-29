@@ -17,11 +17,11 @@ jobs:
           cache: pip
           python-version: 3
 
-      - name: Install pdoc
-        run: pip install pdoc
+      - name: Install dependencies
+        run: pip install -e .[docs]
 
       - name: Build docs
-        run: pdoc src/python_cli_template/ -o docs
+        run: pdoc src/diffused/ -o docs
 
       - name: Deploy
         if: github.ref_name == 'master'

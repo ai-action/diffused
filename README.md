@@ -1,10 +1,20 @@
-# python_cli_template
+# diffused
 
-[![PyPI version](https://badgen.net/pypi/v/python_cli_template)](https://pypi.org/project/python_cli_template/)
-[![codecov](https://codecov.io/gh/remarkablemark/python_cli_template/graph/badge.svg?token=l6pg0nf9aJ)](https://codecov.io/gh/remarkablemark/python_cli_template)
-[![lint](https://github.com/remarkablemark/python_cli_template/actions/workflows/lint.yml/badge.svg)](https://github.com/remarkablemark/python_cli_template/actions/workflows/lint.yml)
+[![PyPI version](https://badgen.net/pypi/v/diffused)](https://pypi.org/project/diffused/)
+[![codecov](https://codecov.io/gh/ai-action/diffused/graph/badge.svg?token=fObC6rYkAJ)](https://codecov.io/gh/ai-action/diffused)
+[![lint](https://github.com/ai-action/diffused/actions/workflows/lint.yml/badge.svg)](https://github.com/ai-action/diffused/actions/workflows/lint.yml)
 
-🐍 Python CLI Template
+🤗 Generate images with diffusion [models](https://huggingface.co/models?pipeline_tag=text-to-image):
+
+```sh
+diffused <model> <prompt>
+```
+
+## Quick Start
+
+```sh
+pipx run diffused segmind/tiny-sd "an apple"
+```
 
 ## Prerequisites
 
@@ -13,32 +23,68 @@
 
 ## Install
 
-[Python](https://pypi.org/project/python_cli_template/):
+[Python](https://pypi.org/project/diffused/):
 
 ```sh
-pipx install python_cli_template
+pipx install diffused
 ```
 
 ## Usage
 
-Greet name:
+Generate image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
 
 ```sh
-python_cli_template --name world
+diffused segmind/tiny-sd "portrait of a cat"
 ```
 
-Check version:
+Generate image with [model](https://huggingface.co/OFA-Sys/small-stable-diffusion-v0), prompt, and filename:
 
 ```sh
-python_cli_template --version
+diffused OFA-Sys/small-stable-diffusion-v0 "cartoon of a cat" --output cat.png
 ```
 
-See help:
+## Arguments
+
+### model
+
+**Required**: Text-to-image diffusion [model](https://huggingface.co/models?pipeline_tag=text-to-image).
 
 ```sh
-python_cli_template --help
+diffused segmind/SSD-1B "An astronaut riding a green horse"
+```
+
+### prompt
+
+**Required**: Text prompt.
+
+```sh
+diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eating sushi with a cat in a izakaya, 35mm photograph, film, professional, 4k, highly detailed"
+```
+
+### --output
+
+**Optional**: Generated image filename.
+
+```sh
+diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output cat.jpg
+```
+
+```sh
+diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o cat.jpg
+```
+
+### --version
+
+```sh
+diffused --version # diffused -v
+```
+
+### --help
+
+```sh
+diffused --help # diffused -h
 ```
 
 ## License
 
-[MIT](https://github.com/remarkablemark/python_cli_template/blob/master/LICENSE)
+[MIT](https://github.com/ai-action/diffused/blob/master/LICENSE)

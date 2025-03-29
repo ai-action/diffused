@@ -9,23 +9,24 @@
 - [Test](#test)
 - [Lint](#lint)
 - [Build](#build)
+- [Docs](#docs)
 - [Release](#release)
 
 </details>
 
-Pull requests are welcome! By participating in this project, you agree to abide by our [code of conduct](https://github.com/remarkablemark/.github/blob/master/CODE_OF_CONDUCT.md).
+Pull requests are welcome! By participating in this project, you agree to abide by our [code of conduct](https://github.com/ai-action/.github/blob/master/CODE_OF_CONDUCT.md).
 
 ## Fork
 
-[Fork](https://github.com/remarkablemark/python_cli_template/fork) and then clone the repository:
+[Fork](https://github.com/ai-action/diffused/fork) and then clone the repository:
 
 ```sh
 # replace <USER> with your username
-git clone git@github.com:<USER>/python_cli_template.git
+git clone git@github.com:<USER>/diffused.git
 ```
 
 ```sh
-cd python_cli_template
+cd diffused
 ```
 
 ## Install
@@ -51,8 +52,7 @@ source .venv/bin/activate
 Install the dependencies:
 
 ```sh
-pip install -e '.[build]'
-pip install -e '.[test]'
+pip install -e '.[lint]'
 ```
 
 Install pre-commit into your git hooks:
@@ -63,11 +63,7 @@ pre-commit install
 
 ## Develop
 
-Make your changes, add tests/documentation, and ensure tests pass:
-
-```sh
-pytest
-```
+Make your changes, add tests/documentation, and ensure [tests](#test) pass.
 
 Write a commit message that follows the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
@@ -80,17 +76,23 @@ Write a commit message that follows the [Conventional Commits](https://www.conve
 - **ci**: Updates configuration files and scripts for continuous integration
 - **docs**: Documentation only changes
 
-Push to your fork and create a [pull request](https://github.com/remarkablemark/python_cli_template/compare/).
+Push to your fork and create a [pull request](https://github.com/ai-action/diffused/compare/).
 
 At this point, wait for us to review your pull request. We'll try to review pull requests within 1-3 business days. We may suggest changes, improvements, and/or alternatives.
 
 Things that will improve the chance that your pull request will be accepted:
 
-- [ ] Write tests that pass [CI](https://github.com/remarkablemark/python_cli_template/actions/workflows/test.yml).
+- [ ] Write tests that pass [CI](https://github.com/ai-action/diffused/actions/workflows/test.yml).
 - [ ] Write solid documentation.
 - [ ] Write a good [commit message](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
 
 ## Test
+
+Install the dependencies:
+
+```sh
+pip install -e '.[test]'
+```
 
 Run the tests:
 
@@ -123,10 +125,16 @@ pipx install .
 Test the command:
 
 ```sh
-python_cli_template --help
+diffused --help
 ```
 
 ## Lint
+
+Install the dependencies:
+
+```sh
+pip install -e '.[lint]'
+```
 
 Update pre-commit hooks to the latest version:
 
@@ -154,6 +162,12 @@ ruff format
 
 ## Build
 
+Install the dependencies:
+
+```sh
+pip install -e '.[build]'
+```
+
 Generate the distribution packages:
 
 ```sh
@@ -169,19 +183,27 @@ twine upload --repository testpypi dist/*
 Install the package:
 
 ```sh
-pip install --index-url https://test.pypi.org/simple/ --no-deps python_cli_template
+pip install --index-url https://test.pypi.org/simple/ --no-deps diffused
 ```
 
 Bundle the package with [PyInstaller](https://pyinstaller.org/):
 
 ```sh
-pyinstaller src/python_cli_template/cli.py --name python_cli_template
+pyinstaller src/diffused/cli.py --name diffused
+```
+
+## Docs
+
+Install the dependencies:
+
+```sh
+pip install -e '.[docs]'
 ```
 
 Generate the docs with [pdoc](https://pdoc.dev/):
 
 ```sh
-pdoc src/python_cli_template/
+pdoc src/diffused/
 ```
 
 ## Release

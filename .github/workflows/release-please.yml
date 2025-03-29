@@ -29,7 +29,7 @@ jobs:
       id-token: write
     environment:
       name: pypi
-      url: https://pypi.org/p/python_cli_template
+      url: https://pypi.org/p/diffused
 
     steps:
       - name: Checkout repository
@@ -74,7 +74,7 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build binary
-        run: pyinstaller src/python_cli_template/cli.py --name python_cli_template
+        run: pyinstaller src/diffused/cli.py --name diffused
 
       - name: Upload Release Artifact
         shell: bash
@@ -82,7 +82,7 @@ jobs:
           cd dist
           os=${{ matrix.os }}
           filename=${os%-*}.zip
-          zip -r $filename python_cli_template
+          zip -r $filename diffused
           gh release upload ${{ needs.release.outputs.tag_name }} $filename
         env:
           GH_TOKEN: ${{ github.token }}

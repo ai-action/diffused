@@ -1,9 +1,9 @@
 [project]
-name = "python_cli_template"
+name = "diffused"
 authors = [
     { name="Mark", email="mark@remarkablemark.org" },
 ]
-description = "Python CLI Template"
+description = "Generate images with diffusion models"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
@@ -13,33 +13,48 @@ classifiers = [
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 dynamic = ["version"]
-dependencies = []
+dependencies = [
+    "accelerate>=1.5.0",
+    "diffusers>=0.32.0",
+    "torch>=2.6.0",
+    "transformers>=4.50.0",
+]
 
 [project.scripts]
-python_cli_template = "python_cli_template.cli:main"
+diffused = "diffused.cli:main"
 
 [project.entry-points."pipx.run"]
-python_cli_template = "python_cli_template.cli:main"
+diffused = "diffused.cli:main"
 
 [project.optional-dependencies]
 build = [
     "build==1.2.2.post1",
-    "pdoc==15.0.1",
     "pyinstaller==6.12.0",
     "twine==6.1.0",
 ]
-test = [
+docs = [
+    "pdoc==15.0.1",
+]
+lint = [
     "black==25.1.0",
-    "coverage==7.7.1",
     "isort==6.0.1",
     "pre-commit==4.2.0",
-    "pytest==8.3.5",
     "ruff==0.11.2",
+]
+test = [
+    "coverage==7.7.1",
+    "pytest==8.3.5",
 ]
 
 [project.urls]
-Homepage = "https://github.com/remarkablemark/python_cli_template"
-Issues = "https://github.com/remarkablemark/python_cli_template/issues"
+Homepage = "https://github.com/ai-action/diffused"
+Issues = "https://github.com/ai-action/diffused/issues"
 
 [tool.black]
 fast = true
+
+[tool.coverage.run]
+omit = [
+    # omit pytorch-generated files in /tmp
+    "/tmp/*",
+]
