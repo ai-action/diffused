@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/ai-action/diffused/compare/v0.1.1...v0.1.2) (2025-03-29)
+
+
+### Documentation
+
+* **readme:** prepend `pipx run` to quick start code blocks ([6c66920](https://github.com/ai-action/diffused/commit/6c669205e1cc98d00380866fad48d282fe4a579a))
+
 ## [0.1.1](https://github.com/ai-action/diffused/compare/v0.1.0...v0.1.1) (2025-03-29)
 
 
