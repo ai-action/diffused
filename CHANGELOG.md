@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/ai-action/diffused/compare/v0.1.2...v0.1.3) (2025-03-29)
+
+
+### Bug Fixes
+
+* **github:** fix upload job in workflow release-please.yml ([c7ae7a1](https://github.com/ai-action/diffused/commit/c7ae7a133c86b99d673cd68dd527eb0dc0fed474))
+
 ## [0.1.2](https://github.com/ai-action/diffused/compare/v0.1.1...v0.1.2) (2025-03-29)
 
 
