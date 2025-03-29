@@ -15,13 +15,13 @@ diffused <model> <prompt>
 Generate image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
 
 ```sh
-diffused segmind/tiny-sd "portrait of a cat"
+pipx run diffused segmind/tiny-sd "portrait of a cat"
 ```
 
 Generate image with [model](https://huggingface.co/OFA-Sys/small-stable-diffusion-v0), prompt, and filename:
 
 ```sh
-diffused OFA-Sys/small-stable-diffusion-v0 "cartoon of a cat" --output cat.png
+pipx run diffused OFA-Sys/small-stable-diffusion-v0 "cartoon of a cat" --output cat.png
 ```
 
 ## Prerequisites
@@ -75,11 +75,15 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o cat.jpg
 
 ### `--version`
 
+Show program's version number and exit:
+
 ```sh
 diffused --version # diffused -v
 ```
 
 ### `--help`
+
+Show help message and exit:
 
 ```sh
 diffused --help # diffused -h
