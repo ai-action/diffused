@@ -1,4 +1,4 @@
-name: release-please
+name: release
 on:
   push:
     branches:
@@ -39,7 +39,6 @@ jobs:
       - name: Use Python
         uses: actions/setup-python@v5
         with:
-          cache: pip
           python-version: 3
 
       - name: Install build
@@ -70,7 +69,6 @@ jobs:
       - name: Use Python
         uses: actions/setup-python@v5
         with:
-          cache: pip
           python-version: 3
 
       - name: Install dependencies
@@ -80,12 +78,21 @@ jobs:
         run: pyinstaller src/diffused/cli.py --name diffused
 
       - name: Upload Release Artifact
-        shell: bash
+        if: matrix.os != 'windows'
         run: |
           cd dist
           os=${{ matrix.os }}
           filename=${os%-*}.zip
           zip -r $filename diffused
           gh release upload ${{ needs.release.outputs.tag_name }} $filename
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Upload Release Artifact
+        if: matrix.os == 'windows'
+        run: |
+          cd dist
+          Compress-Archive -Path diffused/* -Destination windows.zip
+          gh release upload ${{ needs.release.outputs.tag_name }} windows.zip
         env:
           GH_TOKEN: ${{ github.token }}
