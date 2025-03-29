@@ -85,6 +85,6 @@ jobs:
           os=${{ matrix.os }}
           filename=${os%-*}.zip
           zip -r $filename diffused
-          gh release upload ${{ needs.release.outputs.tag_name }} $filename
+          gh release upload ${{ needs.release-please.outputs.tag_name }} $filename
         env:
           GH_TOKEN: ${{ github.token }}
