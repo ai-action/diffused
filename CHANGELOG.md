@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/ai-action/diffused/compare/v0.1.5...v0.1.6) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** fix release workflow on windows ([d3d40be](https://github.com/ai-action/diffused/commit/d3d40bea3b19ca9522591e4283dedc49e1260398))
+
 ## [0.1.5](https://github.com/ai-action/diffused/compare/v0.1.4...v0.1.5) (2025-03-30)
 
 
