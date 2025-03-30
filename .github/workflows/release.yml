@@ -70,7 +70,7 @@ jobs:
           python-version: 3
 
       - name: Install dependencies
-        run: pip install pyinstaller
+        run: pip install -e '.[build]'
 
       - name: Build executable
         shell: bash
