@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/ai-action/diffused/compare/v0.1.4...v0.1.5) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** don't cache pip during release and fix windows executable ([183460a](https://github.com/ai-action/diffused/commit/183460a58034244b1bfbfee481e87e1d27625969))
+
 ## [0.1.4](https://github.com/ai-action/diffused/compare/v0.1.3...v0.1.4) (2025-03-29)
 
 
