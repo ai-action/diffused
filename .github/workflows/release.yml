@@ -67,15 +67,14 @@ jobs:
       - name: Use Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Build executable
         shell: bash
         run: |
-          pip install pyinstaller
           python -m venv .venv
           source $(find .venv -type f -name activate)
-          pip install -r requirements.txt
+          pip install -r requirements.txt pyinstaller
           pyinstaller src/diffused/cli.py --name diffused --onefile --clean
 
       - name: Compress executable
