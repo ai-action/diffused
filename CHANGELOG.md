@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.16](https://github.com/ai-action/diffused/compare/v0.1.15...v0.1.16) (2025-03-30)
+
+
+### Documentation
+
+* **readme:** improve script and grammar ([d72e7c8](https://github.com/ai-action/diffused/commit/d72e7c8a728ea92dab4b969cc89664087348dc93))
+
 ## [0.1.15](https://github.com/ai-action/diffused/compare/v0.1.14...v0.1.15) (2025-03-30)
 
 
