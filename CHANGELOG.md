@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.12](https://github.com/ai-action/diffused/compare/v0.1.11...v0.1.12) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** fix legacy license specification in release.yml ([2e057b8](https://github.com/ai-action/diffused/commit/2e057b84e2d1ccf22efeb967ba7d7375a7cdb600))
+
 ## [0.1.11](https://github.com/ai-action/diffused/compare/v0.1.10...v0.1.11) (2025-03-30)
 
 
