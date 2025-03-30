@@ -12,13 +12,13 @@ diffused <model> <prompt>
 
 ## Quick Start
 
-Generate image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
+Generate an image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
 
 ```sh
 pipx run diffused segmind/tiny-sd "portrait of a cat"
 ```
 
-Generate image with [model](https://huggingface.co/OFA-Sys/small-stable-diffusion-v0), prompt, and filename:
+Generate an image with [model](https://huggingface.co/OFA-Sys/small-stable-diffusion-v0), prompt, and filename:
 
 ```sh
 pipx run diffused OFA-Sys/small-stable-diffusion-v0 "cartoon of a cat" --output cat.png
@@ -29,21 +29,13 @@ pipx run diffused OFA-Sys/small-stable-diffusion-v0 "cartoon of a cat" --output 
 - [Python](https://www.python.org/)
 - [pipx](https://pipx.pypa.io/)
 
-## Install
+## CLI
 
-CLI:
+Install the CLI:
 
 ```sh
 pipx install diffused
 ```
-
-Package:
-
-```sh
-pip install diffused
-```
-
-## CLI
 
 ### `model`
 
@@ -69,13 +61,15 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eati
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output cat.jpg
 ```
 
+With short option:
+
 ```sh
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o cat.jpg
 ```
 
 ### `--version`
 
-Show program's version number and exit:
+Show the program's version number and exit:
 
 ```sh
 diffused --version # diffused -v
@@ -83,15 +77,33 @@ diffused --version # diffused -v
 
 ### `--help`
 
-Show help message and exit:
+Show the help message and exit:
 
 ```sh
 diffused --help # diffused -h
 ```
 
-## Package
+## Script
 
-Generate image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
+Create a virtual environment:
+
+```sh
+python3 -m venv .venv
+```
+
+Activate the virtual environment:
+
+```sh
+source .venv/bin/activate
+```
+
+Install the package:
+
+```sh
+pip install diffused
+```
+
+Generate an image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
 
 ```py
 # script.py
@@ -99,6 +111,12 @@ from diffused import generate
 
 image = generate(model="segmind/tiny-sd", prompt="apple")
 image.save("apple.png")
+```
+
+Run the script:
+
+```sh
+python script.py
 ```
 
 ## License
