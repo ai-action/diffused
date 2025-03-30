@@ -1,11 +1,11 @@
-name: build
+name: docs
 on: [push, pull_request]
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
