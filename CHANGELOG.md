@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.8](https://github.com/ai-action/diffused/compare/v0.1.7...v0.1.8) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** fix cli executable in workflow release.yml ([255c273](https://github.com/ai-action/diffused/commit/255c2734bd6ad1de4d64bc68cc401cc27f733e11))
+
 ## [0.1.7](https://github.com/ai-action/diffused/compare/v0.1.6...v0.1.7) (2025-03-30)
 
 
