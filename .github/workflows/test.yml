@@ -62,6 +62,7 @@ jobs:
       matrix:
         command:
           - diffused segmind/tiny-sd "an apple"
+          - diffused segmind/tiny-sd "an apple" --output apple.jpg --width=512 --height=512
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -89,7 +90,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact
+          name: artifact-${{ hashFiles('**/*.jpg', '**/*.png') }}
           path: |
             *.jpg
             *.png

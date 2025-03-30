@@ -30,10 +30,26 @@ def main(argv: list[str] = None) -> None:
         help="output file",
     )
 
+    parser.add_argument(
+        "--width",
+        "-W",
+        type=int,
+        help="image width",
+    )
+
+    parser.add_argument(
+        "--height",
+        "-H",
+        type=int,
+        help="image height",
+    )
+
     args = parser.parse_args(argv)
 
     filename = args.output if args.output else f"{uuid1()}.png"
-    image = generate(model=args.model, prompt=args.prompt)
+    image = generate(
+        model=args.model, prompt=args.prompt, width=args.width, height=args.height
+    )
     image.save(filename)
     print(f"🤗 {filename}")
 
