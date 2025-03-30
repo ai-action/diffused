@@ -58,13 +58,41 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eati
 **Optional**: Generated image filename.
 
 ```sh
-diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output cat.jpg
+diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output=cat.jpg
 ```
 
 With short option:
 
 ```sh
-diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o cat.jpg
+diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o=cat.jpg
+```
+
+### `--width`
+
+**Optional**: Generated image width in pixels.
+
+```sh
+diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --width=1024
+```
+
+With short option:
+
+```sh
+diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -W=1024
+```
+
+### `--height`
+
+**Optional**: Generated image height in pixels.
+
+```sh
+diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --height=1024
+```
+
+With short option:
+
+```sh
+diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -H=1024
 ```
 
 ### `--version`

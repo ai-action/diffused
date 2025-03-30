@@ -14,6 +14,13 @@ def test_version(capsys: pytest.LogCaptureFixture) -> None:
     assert captured.out == __version__ + "\n"
 
 
+def test_version_short(capsys: pytest.LogCaptureFixture) -> None:
+    with pytest.raises(SystemExit):
+        main(["-v"])
+    captured = capsys.readouterr()
+    assert captured.out == __version__ + "\n"
+
+
 def test_help(capsys: pytest.LogCaptureFixture) -> None:
     with pytest.raises(SystemExit):
         main(["--help"])
@@ -21,7 +28,14 @@ def test_help(capsys: pytest.LogCaptureFixture) -> None:
     assert "Generate image with diffusion model" in captured.out
 
 
-def test_required(capsys: pytest.LogCaptureFixture) -> None:
+def test_help_short(capsys: pytest.LogCaptureFixture) -> None:
+    with pytest.raises(SystemExit):
+        main(["-h"])
+    captured = capsys.readouterr()
+    assert "Generate image with diffusion model" in captured.out
+
+
+def test_no_arguments(capsys: pytest.LogCaptureFixture) -> None:
     with pytest.raises(SystemExit) as exception:
         main([])
     captured = capsys.readouterr()
@@ -29,7 +43,7 @@ def test_required(capsys: pytest.LogCaptureFixture) -> None:
     assert "error: the following arguments are required: model, prompt" in captured.err
 
 
-def test_invalid(capsys: pytest.LogCaptureFixture) -> None:
+def test_invalid_argument(capsys: pytest.LogCaptureFixture) -> None:
     with pytest.raises(SystemExit) as exception:
         main(["model", "prompt", "--invalid"])
     captured = capsys.readouterr()
@@ -39,7 +53,7 @@ def test_invalid(capsys: pytest.LogCaptureFixture) -> None:
 
 @patch("diffusers.AutoPipelineForText2Image.from_pretrained")
 @patch("PIL.Image.Image.save")
-def test_generate(
+def test_generate_image(
     mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
     main(["model", "prompt"])
@@ -56,7 +70,7 @@ def test_generate(
 
 @patch("diffusers.AutoPipelineForText2Image.from_pretrained")
 @patch("PIL.Image.Image.save")
-def test_generate_output(
+def test_output(
     mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
     filename = "image.png"
@@ -64,3 +78,37 @@ def test_generate_output(
     mock_save.assert_called_once()
     captured = capsys.readouterr()
     assert captured.out == f"🤗 {filename}\n"
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_output_short(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    filename = "image.png"
+    main(["model", "prompt", "-o", filename])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert captured.out == f"🤗 {filename}\n"
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_width_height(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "--width", "1024", "--height", "1024"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_width_height_short(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "-W", "1024", "-H", "1024"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
