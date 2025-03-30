@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.1.16](https://github.com/ai-action/diffused/compare/v0.1.15...v0.1.16) (2025-03-30)
+## [0.2.0](https://github.com/ai-action/diffused/compare/v0.1.16...v0.2.0) (2025-03-30)
 
+### Features
+
+* add arguments width and height ([2c92afe](https://github.com/ai-action/diffused/commit/2c92afebad7f637b211b4d895b140527507203d9))
+
+## [0.1.16](https://github.com/ai-action/diffused/compare/v0.1.15...v0.1.16) (2025-03-30)
 
 ### Documentation
 
@@ -9,13 +14,11 @@
 
 ## [0.1.15](https://github.com/ai-action/diffused/compare/v0.1.14...v0.1.15) (2025-03-30)
 
-
 ### Bug Fixes
 
 * **pyproject:** set requires-python to &gt;=3.9 ([c4399db](https://github.com/ai-action/diffused/commit/c4399db459b59f263de1acb4e77383e7d9afcaf7))
 
 ## [0.1.14](https://github.com/ai-action/diffused/compare/v0.1.13...v0.1.14) (2025-03-30)
-
 
 ### Bug Fixes
 
@@ -23,13 +26,11 @@
 
 ## [0.1.13](https://github.com/ai-action/diffused/compare/v0.1.12...v0.1.13) (2025-03-30)
 
-
 ### Bug Fixes
 
 * **github:** install from requirements.txt when building executable ([553c806](https://github.com/ai-action/diffused/commit/553c8067f336e4fd47538c993b6d85bca2973a6a))
 
 ## [0.1.12](https://github.com/ai-action/diffused/compare/v0.1.11...v0.1.12) (2025-03-30)
-
 
 ### Bug Fixes
 
@@ -37,13 +38,11 @@
 
 ## [0.1.11](https://github.com/ai-action/diffused/compare/v0.1.10...v0.1.11) (2025-03-30)
 
-
 ### Bug Fixes
 
 * **pyproject:** fix license error for Python 3.8 build ([39eb9cf](https://github.com/ai-action/diffused/commit/39eb9cfa3b01519d3f398846518d66f023a8581a))
 
 ## [0.1.10](https://github.com/ai-action/diffused/compare/v0.1.9...v0.1.10) (2025-03-30)
-
 
 ### Bug Fixes
 
@@ -51,13 +50,11 @@
 
 ## [0.1.9](https://github.com/ai-action/diffused/compare/v0.1.8...v0.1.9) (2025-03-30)
 
-
 ### Bug Fixes
 
 * **github:** compress executable in workflow release.yml ([9b3986a](https://github.com/ai-action/diffused/commit/9b3986a2d1f3e00226902b2e57f671a8ad9a6b56))
 
 ## [0.1.8](https://github.com/ai-action/diffused/compare/v0.1.7...v0.1.8) (2025-03-30)
-
 
 ### Bug Fixes
 
@@ -65,13 +62,11 @@
 
 ## [0.1.7](https://github.com/ai-action/diffused/compare/v0.1.6...v0.1.7) (2025-03-30)
 
-
 ### Bug Fixes
 
 * **github:** clean and create one executable in release.yml ([8869a4e](https://github.com/ai-action/diffused/commit/8869a4eec3f7b652f140bb61201991054d5b17be))
 
 ## [0.1.6](https://github.com/ai-action/diffused/compare/v0.1.5...v0.1.6) (2025-03-30)
-
 
 ### Bug Fixes
 
@@ -79,13 +74,11 @@
 
 ## [0.1.5](https://github.com/ai-action/diffused/compare/v0.1.4...v0.1.5) (2025-03-30)
 
-
 ### Bug Fixes
 
 * **github:** don't cache pip during release and fix windows executable ([183460a](https://github.com/ai-action/diffused/commit/183460a58034244b1bfbfee481e87e1d27625969))
 
 ## [0.1.4](https://github.com/ai-action/diffused/compare/v0.1.3...v0.1.4) (2025-03-29)
-
 
 ### Bug Fixes
 
@@ -93,20 +86,17 @@
 
 ## [0.1.3](https://github.com/ai-action/diffused/compare/v0.1.2...v0.1.3) (2025-03-29)
 
-
 ### Bug Fixes
 
 * **github:** fix upload job in workflow release-please.yml ([c7ae7a1](https://github.com/ai-action/diffused/commit/c7ae7a133c86b99d673cd68dd527eb0dc0fed474))
 
 ## [0.1.2](https://github.com/ai-action/diffused/compare/v0.1.1...v0.1.2) (2025-03-29)
 
-
 ### Documentation
 
 * **readme:** prepend `pipx run` to quick start code blocks ([6c66920](https://github.com/ai-action/diffused/commit/6c669205e1cc98d00380866fad48d282fe4a579a))
 
 ## [0.1.1](https://github.com/ai-action/diffused/compare/v0.1.0...v0.1.1) (2025-03-29)
-
 
 ### Documentation
 
