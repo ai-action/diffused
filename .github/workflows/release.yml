@@ -78,7 +78,7 @@ jobs:
         run: pyinstaller src/diffused/cli.py --name diffused
 
       - name: Upload Release Artifact
-        if: matrix.os != 'windows'
+        if: matrix.os != 'windows-latest'
         run: |
           cd dist
           os=${{ matrix.os }}
@@ -89,7 +89,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       - name: Upload Release Artifact
-        if: matrix.os == 'windows'
+        if: matrix.os == 'windows-latest'
         run: |
           cd dist
           Compress-Archive -Path diffused/* -Destination windows.zip
