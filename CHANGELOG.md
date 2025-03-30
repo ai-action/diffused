@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.14](https://github.com/ai-action/diffused/compare/v0.1.13...v0.1.14) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** use Python 3.9 when building executable in release.yml ([8755bd6](https://github.com/ai-action/diffused/commit/8755bd6049961378c08d678aa071c3d2763f8426))
+
 ## [0.1.13](https://github.com/ai-action/diffused/compare/v0.1.12...v0.1.13) (2025-03-30)
 
 
