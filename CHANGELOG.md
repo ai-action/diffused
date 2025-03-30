@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.10](https://github.com/ai-action/diffused/compare/v0.1.9...v0.1.10) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** decrease executable size in release.yml ([c10ff30](https://github.com/ai-action/diffused/commit/c10ff3055ae6038543c716c9fd6b4050a6479574))
+
 ## [0.1.9](https://github.com/ai-action/diffused/compare/v0.1.8...v0.1.9) (2025-03-30)
 
 
