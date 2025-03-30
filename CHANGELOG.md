@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.11](https://github.com/ai-action/diffused/compare/v0.1.10...v0.1.11) (2025-03-30)
+
+
+### Bug Fixes
+
+* **pyproject:** fix license error for Python 3.8 build ([39eb9cf](https://github.com/ai-action/diffused/commit/39eb9cfa3b01519d3f398846518d66f023a8581a))
+
 ## [0.1.10](https://github.com/ai-action/diffused/compare/v0.1.9...v0.1.10) (2025-03-30)
 
 
