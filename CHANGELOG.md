@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.13](https://github.com/ai-action/diffused/compare/v0.1.12...v0.1.13) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** install from requirements.txt when building executable ([553c806](https://github.com/ai-action/diffused/commit/553c8067f336e4fd47538c993b6d85bca2973a6a))
+
 ## [0.1.12](https://github.com/ai-action/diffused/compare/v0.1.11...v0.1.12) (2025-03-30)
 
 
