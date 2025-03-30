@@ -73,20 +73,28 @@ jobs:
         run: pip install -e '.[build]'
 
       - name: Build executable
-        shell: bash
-        run: |
-          os=${{ matrix.os }}
-          os=${os%-*}
-          tag=$(echo ${{ needs.release.outputs.tag_name }} | tr -d 'v')
-          if [[ $os == 'ubuntu' ]]; then
-            name=diffused-linux-$tag
-          else
-            name=diffused-$os-$tag
-          fi
-          pyinstaller src/diffused/cli.py --name $name --onefile --clean
+        run: pyinstaller src/diffused/cli.py --name diffused --onefile --clean
+
+      - name: Compress executable
+        if: matrix.os != 'windows-latest'
+        working-directory: dist
+        run: zip archive.zip diffused
+
+      - name: Compress executable
+        if: matrix.os == 'windows-latest'
+        working-directory: dist
+        run: Compress-Archive -Path diffused.exe -Destination archive.zip
 
       - name: Upload Release Artifact
         shell: bash
-        run: gh release upload ${{ needs.release.outputs.tag_name }} $(ls -d dist/*)
+        working-directory: dist
+        run: |
+          os=${{ matrix.os }}
+          filename=${os%-*}.zip
+          if [[ $filename == 'ubuntu'* ]]; then
+            filename=linux.zip
+          fi
+          mv archive.zip $filename
+          gh release upload ${{ needs.release.outputs.tag_name }} $filename
         env:
           GH_TOKEN: ${{ github.token }}
