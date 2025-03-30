@@ -65,7 +65,7 @@ jobs:
       - name: Generate image
         run: diffused segmind/tiny-sd "an apple"
         env:
-          DISABLE_TELEMETRY: YES
+          DO_NOT_TRACK: 1
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
