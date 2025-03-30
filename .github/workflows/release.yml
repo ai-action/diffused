@@ -72,16 +72,10 @@ jobs:
       - name: Build executable
         shell: bash
         run: |
-          # fix legacy specification
-          if [[ '${{ matrix.os }}' == 'macos'* ]]; then
-            sed -i '' 's/"MIT"/{ file = "LICENSE" }/' pyproject.toml
-          else
-            sed -i 's/"MIT"/{ file = "LICENSE" }/' pyproject.toml
-          fi
+          pip install pyinstaller
           python -m venv .venv
           source $(find .venv -type f -name activate)
-          pip install -e .
-          pip install pyinstaller
+          pip install -r requirements.txt
           pyinstaller src/diffused/cli.py --name diffused --onefile --clean
 
       - name: Compress executable
