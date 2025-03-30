@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/ai-action/diffused/compare/v0.1.6...v0.1.7) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** clean and create one executable in release.yml ([8869a4e](https://github.com/ai-action/diffused/commit/8869a4eec3f7b652f140bb61201991054d5b17be))
+
 ## [0.1.6](https://github.com/ai-action/diffused/compare/v0.1.5...v0.1.6) (2025-03-30)
 
 
