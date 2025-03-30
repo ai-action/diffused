@@ -31,17 +31,11 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  integration:
+  install:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Cache models
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface/
-          key: ${{ runner.os }}-huggingface
 
       - name: Use Python
         uses: actions/setup-python@v5
@@ -62,8 +56,33 @@ jobs:
       - name: Get help
         run: diffused --help
 
+  integration:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command:
+          - diffused segmind/tiny-sd "an apple"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/
+          key: ${{ runner.os }}-huggingface
+
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          cache: pip
+          python-version: 3
+
+      - name: Install package
+        run: pipx install .
+
       - name: Generate image
-        run: diffused segmind/tiny-sd "an apple"
+        run: ${{ matrix.command }}
         env:
           DO_NOT_TRACK: 1
 
@@ -72,4 +91,5 @@ jobs:
         with:
           name: artifact
           path: |
+            *.jpg
             *.png
