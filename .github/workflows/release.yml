@@ -12,7 +12,6 @@ jobs:
       pull-requests: write
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
 
     steps:
       - name: Release Please
@@ -49,54 +48,3 @@ jobs:
 
       - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-
-  upload:
-    needs: release
-    if: ${{ needs.release.outputs.release_created }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Use Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.9
-
-      - name: Build executable
-        shell: bash
-        run: |
-          python -m venv .venv
-          source $(find .venv -type f -name activate)
-          pip install -r requirements.txt pyinstaller
-          pyinstaller src/diffused/cli.py --name diffused --onefile --clean
-
-      - name: Compress executable
-        if: matrix.os != 'windows-latest'
-        working-directory: dist
-        run: zip archive.zip diffused
-
-      - name: Compress executable
-        if: matrix.os == 'windows-latest'
-        working-directory: dist
-        run: Compress-Archive -Path diffused.exe -Destination archive.zip
-
-      - name: Upload Release Artifact
-        shell: bash
-        working-directory: dist
-        run: |
-          os=${{ matrix.os }}
-          filename=${os%-*}.zip
-          if [[ $filename == 'ubuntu'* ]]; then
-            filename=linux.zip
-          fi
-          mv archive.zip $filename
-          gh release upload ${{ needs.release.outputs.tag_name }} $filename
-        env:
-          GH_TOKEN: ${{ github.token }}
