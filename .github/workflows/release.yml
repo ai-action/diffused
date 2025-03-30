@@ -72,25 +72,21 @@ jobs:
       - name: Install dependencies
         run: pip install pyinstaller
 
-      - name: Build binary
-        run: pyinstaller src/diffused/cli.py --name diffused
-
-      - name: Upload Release Artifact
-        if: matrix.os != 'windows-latest'
+      - name: Build executable
+        shell: bash
         run: |
-          cd dist
           os=${{ matrix.os }}
-          filename=${os%-*}.zip
-          zip -r $filename diffused
-          gh release upload ${{ needs.release.outputs.tag_name }} $filename
-        env:
-          GH_TOKEN: ${{ github.token }}
+          os=${os%-*}
+          tag=$(echo ${{ needs.release.outputs.tag_name }} | tr -d 'v')
+          if [[ $os == 'ubuntu' ]]; then
+            name=diffused-linux-$tag
+          else
+            name=diffused-$os-$tag
+          fi
+          pyinstaller src/diffused/cli.py --name $name --onefile --clean
 
       - name: Upload Release Artifact
-        if: matrix.os == 'windows-latest'
-        run: |
-          cd dist
-          Compress-Archive -Path diffused/* -Destination windows.zip
-          gh release upload ${{ needs.release.outputs.tag_name }} windows.zip
+        shell: bash
+        run: gh release upload ${{ needs.release.outputs.tag_name }} $(ls -d dist/*)
         env:
           GH_TOKEN: ${{ github.token }}
