@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.9](https://github.com/ai-action/diffused/compare/v0.1.8...v0.1.9) (2025-03-30)
+
+
+### Bug Fixes
+
+* **github:** compress executable in workflow release.yml ([9b3986a](https://github.com/ai-action/diffused/commit/9b3986a2d1f3e00226902b2e57f671a8ad9a6b56))
+
 ## [0.1.8](https://github.com/ai-action/diffused/compare/v0.1.7...v0.1.8) (2025-03-30)
 
 
