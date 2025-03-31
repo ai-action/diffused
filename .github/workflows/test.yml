@@ -61,8 +61,8 @@ jobs:
     strategy:
       matrix:
         command:
-          - diffused segmind/tiny-sd "an apple"
-          - diffused segmind/tiny-sd "an apple" --output apple.jpg --width=512 --height=512
+          - diffused segmind/tiny-sd apple
+          - diffused segmind/tiny-sd apple --output apple.jpg --width=512 --height=512 --device=cpu
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

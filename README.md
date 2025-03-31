@@ -61,7 +61,7 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eati
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output=cat.jpg
 ```
 
-With short option:
+With the short option:
 
 ```sh
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o=cat.jpg
@@ -75,7 +75,7 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o=cat.jpg
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --width=1024
 ```
 
-With short option:
+With the short option:
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -W=1024
@@ -89,10 +89,24 @@ diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -W=1024
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --height=1024
 ```
 
-With short option:
+With the short option:
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -H=1024
+```
+
+### `--device`
+
+**Optional**: [Device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
+
+```sh
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in the ocean, 8k" --device=cuda
+```
+
+With the short option:
+
+```sh
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in the ocean, 8k" -d=cuda
 ```
 
 ### `--version`
@@ -146,6 +160,8 @@ Run the script:
 ```sh
 python script.py
 ```
+
+See the [API documentation](https://ai-action.github.io/diffused/diffused/generate.html).
 
 ## License
 
