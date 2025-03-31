@@ -42,7 +42,7 @@ lint = [
     "ruff==0.11.2",
 ]
 test = [
-    "coverage==7.7.1",
+    "coverage==7.8.0",
     "pytest==8.3.5",
 ]
 
