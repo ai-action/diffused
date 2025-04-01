@@ -33,15 +33,15 @@ def main(argv: list[str] = None) -> None:
     parser.add_argument(
         "--width",
         "-W",
-        type=int,
         help="generated image width in pixels",
+        type=int,
     )
 
     parser.add_argument(
         "--height",
         "-H",
-        type=int,
         help="generated image height in pixels",
+        type=int,
     )
 
     parser.add_argument(
@@ -53,19 +53,21 @@ def main(argv: list[str] = None) -> None:
     parser.add_argument(
         "--negative-prompt",
         "-np",
-        help="what to exclude in the generated image",
+        help="what to exclude from the generated image",
     )
 
     args = parser.parse_args(argv)
 
-    filename = args.output if args.output else f"{uuid1()}.png"
     image = generate(
         model=args.model,
         prompt=args.prompt,
         width=args.width,
         height=args.height,
         device=args.device,
+        negative_prompt=args.negative_prompt,
     )
+
+    filename = args.output if args.output else f"{uuid1()}.png"
     image.save(filename)
     print(f"🤗 {filename}")
 

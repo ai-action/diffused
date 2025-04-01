@@ -16,10 +16,10 @@ def generate(
     Args:
         model (str): Diffusion model.
         prompt (str): Text prompt.
-        width (int): Image width in pixels.
-        height (int): Image height in pixels.
+        width (int): Generated image width in pixels.
+        height (int): Generated image height in pixels.
         device (str): Device to accelerate computation (cpu, cuda, mps).
-        negative_prompt (str): What you don't want in the image.
+        negative_prompt (str): What to exclude from the generated image.
 
     Returns:
         image (PIL.Image.Image): Pillow image.
