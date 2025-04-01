@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.0](https://github.com/ai-action/diffused/compare/v0.2.0...v0.3.0) (2025-04-01)
+
+### Features
+
+* add argument device ([a388289](https://github.com/ai-action/diffused/commit/a38828918d05facb97bafe1e21815416e831ef7e))
+
 ## [0.2.0](https://github.com/ai-action/diffused/compare/v0.1.16...v0.2.0) (2025-03-30)
 
 ### Features
