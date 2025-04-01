@@ -27,27 +27,33 @@ def main(argv: list[str] = None) -> None:
     parser.add_argument(
         "--output",
         "-o",
-        help="output file",
+        help="generated image filename",
     )
 
     parser.add_argument(
         "--width",
         "-W",
         type=int,
-        help="image width",
+        help="image width in pixels",
     )
 
     parser.add_argument(
         "--height",
         "-H",
         type=int,
-        help="image height",
+        help="image height in pixels",
     )
 
     parser.add_argument(
         "--device",
         "-d",
-        help="device (cpu, cuda, mps)",
+        help="device to accelerate computation (cpu, cuda, mps)",
+    )
+
+    parser.add_argument(
+        "--negative-prompt",
+        "-np",
+        help="what you don't want in the image",
     )
 
     args = parser.parse_args(argv)

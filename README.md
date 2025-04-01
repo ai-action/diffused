@@ -109,6 +109,20 @@ With the short option:
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in the ocean, 8k" -d=cuda
 ```
 
+### `--negative-prompt`
+
+**Optional**: What you don't want in the image.
+
+```sh
+diffused stabilityai/stable-diffusion-2 "photo of an apple" --negative-prompt="blurry, bright photo, red"
+```
+
+With the short option:
+
+```sh
+diffused stabilityai/stable-diffusion-2 "photo of an apple" -np="blurry, bright photo, red"
+```
+
 ### `--version`
 
 Show the program's version number and exit:

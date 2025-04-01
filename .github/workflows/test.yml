@@ -62,7 +62,8 @@ jobs:
       matrix:
         arguments:
           - apple
-          - apple --output apple.jpg --width=512 --height=512 --device=cpu
+          - apple --output apple.jpg --width=512 --height=512 --device=cpu --negative-prompt=blurry
+          - apple -o apple.png -W=256 -H=256 -d=cpu -np=dark
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
