@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.4.0](https://github.com/ai-action/diffused/compare/v0.3.0...v0.4.0) (2025-04-01)
+
+### Features
+
+* add argument negative prompt ([05e879a](https://github.com/ai-action/diffused/commit/05e879ab2311439e3e843954a1cae345a724d175))
+
 ## [0.3.0](https://github.com/ai-action/diffused/compare/v0.2.0...v0.3.0) (2025-04-01)
 
 ### Features
