@@ -60,9 +60,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        command:
-          - diffused segmind/tiny-sd apple
-          - diffused segmind/tiny-sd apple --output apple.jpg --width=512 --height=512 --device=cpu
+        arguments:
+          - apple
+          - apple --output apple.jpg --width=512 --height=512 --device=cpu
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -83,7 +83,7 @@ jobs:
         run: pipx install .
 
       - name: Generate image
-        run: ${{ matrix.command }}
+        run: diffused segmind/tiny-sd ${{ matrix.arguments }}
         env:
           DO_NOT_TRACK: 1
 
