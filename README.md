@@ -111,7 +111,7 @@ diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in the ocean, 8k
 
 ### `--negative-prompt`
 
-**Optional**: What you don't want in the image.
+**Optional**: What to exclude in the generated image.
 
 ```sh
 diffused stabilityai/stable-diffusion-2 "photo of an apple" --negative-prompt="blurry, bright photo, red"

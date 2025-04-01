@@ -34,14 +34,14 @@ def main(argv: list[str] = None) -> None:
         "--width",
         "-W",
         type=int,
-        help="image width in pixels",
+        help="generated image width in pixels",
     )
 
     parser.add_argument(
         "--height",
         "-H",
         type=int,
-        help="image height in pixels",
+        help="generated image height in pixels",
     )
 
     parser.add_argument(
@@ -53,7 +53,7 @@ def main(argv: list[str] = None) -> None:
     parser.add_argument(
         "--negative-prompt",
         "-np",
-        help="what you don't want in the image",
+        help="what to exclude in the generated image",
     )
 
     args = parser.parse_args(argv)
