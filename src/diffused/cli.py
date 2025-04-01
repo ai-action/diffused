@@ -44,11 +44,21 @@ def main(argv: list[str] = None) -> None:
         help="image height",
     )
 
+    parser.add_argument(
+        "--device",
+        "-d",
+        help="device (cpu, cuda, mps)",
+    )
+
     args = parser.parse_args(argv)
 
     filename = args.output if args.output else f"{uuid1()}.png"
     image = generate(
-        model=args.model, prompt=args.prompt, width=args.width, height=args.height
+        model=args.model,
+        prompt=args.prompt,
+        width=args.width,
+        height=args.height,
+        device=args.device,
     )
     image.save(filename)
     print(f"🤗 {filename}")

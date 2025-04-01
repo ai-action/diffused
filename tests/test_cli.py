@@ -112,3 +112,25 @@ def test_width_height_short(
     mock_save.assert_called_once()
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_device(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "--device", "cuda"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_device_short(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "-d", "cpu"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
