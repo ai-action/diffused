@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/ai-action/diffused/compare/v0.4.0...v0.4.1) (2025-04-01)
+
+
+### Documentation
+
+* **readme:** improve help text of arguments ([3dcfc3c](https://github.com/ai-action/diffused/commit/3dcfc3c03388563cb75fb1924bd05b3306326238))
+
 ## [0.4.0](https://github.com/ai-action/diffused/compare/v0.3.0...v0.4.0) (2025-04-01)
 
 ### Features
