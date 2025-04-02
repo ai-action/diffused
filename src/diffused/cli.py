@@ -56,6 +56,13 @@ def main(argv: list[str] = None) -> None:
         help="what to exclude from the generated image",
     )
 
+    parser.add_argument(
+        "--guidance-scale",
+        "-gs",
+        help="how much the prompt influences image generation",
+        type=float,
+    )
+
     args = parser.parse_args(argv)
 
     image = generate(
@@ -65,6 +72,7 @@ def main(argv: list[str] = None) -> None:
         height=args.height,
         device=args.device,
         negative_prompt=args.negative_prompt,
+        guidance_scale=args.guidance_scale,
     )
 
     filename = args.output if args.output else f"{uuid1()}.png"

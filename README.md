@@ -123,6 +123,20 @@ With the short option:
 diffused stabilityai/stable-diffusion-2 "photo of an apple" -np="blurry, bright photo, red"
 ```
 
+### `--guidance-scale`
+
+**Optional**: How much the prompt influences image generation. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
+
+```sh
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" --guidance-scale=7.5
+```
+
+With the short option:
+
+```sh
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" -gs=7.5
+```
+
 ### `--version`
 
 Show the program's version number and exit:

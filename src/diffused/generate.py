@@ -9,6 +9,7 @@ def generate(
     height: int | None = None,
     device: str | None = None,
     negative_prompt: str | None = None,
+    guidance_scale: float | None = None,
 ) -> Image.Image:
     """
     Generate image with diffusion model.
@@ -20,12 +21,28 @@ def generate(
         height (int): Generated image height in pixels.
         device (str): Device to accelerate computation (cpu, cuda, mps).
         negative_prompt (str): What to exclude from the generated image.
+        guidance_scale (float): How much the prompt influences image generation.
 
     Returns:
         image (PIL.Image.Image): Pillow image.
     """
     pipeline = AutoPipelineForText2Image.from_pretrained(model)
     pipeline.to(device)
-    return pipeline(
-        prompt=prompt, width=width, height=height, negative_prompt=negative_prompt
-    ).images[0]
+
+    if guidance_scale:
+        images = pipeline(
+            prompt=prompt,
+            width=width,
+            height=height,
+            negative_prompt=negative_prompt,
+            guidance_scale=guidance_scale,
+        ).images
+    else:
+        images = pipeline(
+            prompt=prompt,
+            width=width,
+            height=height,
+            negative_prompt=negative_prompt,
+        ).images
+
+    return images[0]

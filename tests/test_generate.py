@@ -3,7 +3,7 @@ from unittest.mock import Mock, create_autospec, patch
 from diffused import generate
 
 
-def pipeline(prompt, width, height, negative_prompt):
+def pipeline(prompt, width, height, negative_prompt, guidance_scale=None):
     pass  # pragma: no cover
 
 
@@ -24,9 +24,14 @@ def test_generate(mock_from_pretrained: Mock) -> None:
     image = generate(model, prompt)
     assert isinstance(image, Mock)
     mock_from_pretrained.assert_called_once_with(model)
+
     mock_pipeline.assert_called_once_with(
-        prompt=prompt, width=None, height=None, negative_prompt=None
+        prompt=prompt,
+        width=None,
+        height=None,
+        negative_prompt=None,
     )
+
     mock_pipeline.to.assert_called_once_with(None)
     mock_pipeline.reset_mock()
     mock_pipeline.to.reset_mock()
@@ -42,6 +47,8 @@ def test_generate_arguments(mock_from_pretrained: Mock) -> None:
     width = 1024
     height = 1024
     device = "cuda"
+    guidance_scale = 7.5
+
     image = generate(
         model=model,
         prompt=prompt,
@@ -49,11 +56,17 @@ def test_generate_arguments(mock_from_pretrained: Mock) -> None:
         height=height,
         device=device,
         negative_prompt=negative_prompt,
+        guidance_scale=guidance_scale,
     )
+
     assert isinstance(image, Mock)
     mock_from_pretrained.assert_called_once_with(model)
     mock_pipeline.assert_called_once_with(
-        prompt=prompt, width=width, height=height, negative_prompt=negative_prompt
+        prompt=prompt,
+        width=width,
+        height=height,
+        negative_prompt=negative_prompt,
+        guidance_scale=guidance_scale,
     )
     mock_pipeline.to.assert_called_once_with(device)
     mock_pipeline.reset_mock()
