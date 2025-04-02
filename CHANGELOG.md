@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/ai-action/diffused/compare/v0.4.1...v0.4.2) (2025-04-02)
+
+
+### Bug Fixes
+
+* **cli:** pass negative_prompt arg to cli ([7d083d5](https://github.com/ai-action/diffused/commit/7d083d50d93a23bcc0b7c9f1408bd6d9b68a0ed6))
+
 ## [0.4.1](https://github.com/ai-action/diffused/compare/v0.4.0...v0.4.1) (2025-04-01)
 
 
