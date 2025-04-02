@@ -1,6 +1,6 @@
 [project]
 name = "diffused"
-version = "0.4.2"
+version = "0.5.0"
 authors = [
     { name="Mark", email="mark@remarkablemark.org" },
 ]

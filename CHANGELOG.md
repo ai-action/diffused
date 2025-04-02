@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.4.2](https://github.com/ai-action/diffused/compare/v0.4.1...v0.4.2) (2025-04-02)
+## [0.5.0](https://github.com/ai-action/diffused/compare/v0.4.2...v0.5.0) (2025-04-02)
 
+### Features
+
+* add argument `guidance_scale` ([#28](https://github.com/ai-action/diffused/pull/28)) ([d60d58e](https://github.com/ai-action/diffused/commit/d60d58e2ce51327fb4dd71f0b33907d65613b70f))
+
+## [0.4.2](https://github.com/ai-action/diffused/compare/v0.4.1...v0.4.2) (2025-04-02)
 
 ### Bug Fixes
 
