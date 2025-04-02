@@ -156,3 +156,25 @@ def test_negative_prompt_short(
     mock_save.assert_called_once()
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_guidance_scale(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "--guidance-scale", "7.5"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_guidance_scale_short(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "-gs", "7.5"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
