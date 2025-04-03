@@ -178,3 +178,25 @@ def test_guidance_scale_short(
     mock_save.assert_called_once()
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_inference_steps(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "--inference-steps", "50"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_inference_steps_short(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "-is", "15"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out

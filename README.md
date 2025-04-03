@@ -137,6 +137,20 @@ With the short option:
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" -gs=7.5
 ```
 
+### `--inference-steps`
+
+**Optional**: Number of diffusion steps used during image generation. The more steps you use, the higher the quality, but the generation time will increase.
+
+```sh
+diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" --inference-steps=50
+```
+
+With the short option:
+
+```sh
+diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" -is=50
+```
+
 ### `--version`
 
 Show the program's version number and exit:

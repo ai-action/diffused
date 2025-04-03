@@ -47,6 +47,7 @@ def test_generate_arguments(mock_from_pretrained: Mock) -> None:
         "width": 1024,
         "height": 1024,
         "guidance_scale": 7.5,
+        "num_inference_steps": 50,
     }
 
     image = generate(model=model, device=device, **pipeline_args)
