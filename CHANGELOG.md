@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.6.0](https://github.com/ai-action/diffused/compare/v0.5.1...v0.6.0) (2025-04-03)
+## [0.6.1](https://github.com/ai-action/diffused/compare/v0.6.0...v0.6.1) (2025-04-03)
 
+### Bug Fixes
+
+* use safetensors ([de8a12c](https://github.com/ai-action/diffused/commit/de8a12c9cff1a2da623645cbe147bad419161b6b))
+
+## [0.6.0](https://github.com/ai-action/diffused/compare/v0.5.1...v0.6.0) (2025-04-03)
 
 ### Features
 
