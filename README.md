@@ -39,7 +39,7 @@ pipx install diffused
 
 ### `model`
 
-**Required**: Text-to-image diffusion [model](https://huggingface.co/models?pipeline_tag=text-to-image).
+**Required** (_str_): Text-to-image diffusion [model](https://huggingface.co/models?pipeline_tag=text-to-image).
 
 ```sh
 diffused segmind/SSD-1B "An astronaut riding a green horse"
@@ -47,7 +47,7 @@ diffused segmind/SSD-1B "An astronaut riding a green horse"
 
 ### `prompt`
 
-**Required**: Text prompt.
+**Required** (_str_): Text prompt.
 
 ```sh
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eating sushi with a cat in a izakaya, 35mm photograph, film, professional, 4k, highly detailed"
@@ -55,7 +55,7 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eati
 
 ### `--output`
 
-**Optional**: Generated image filename.
+**Optional** (_str_): Generated image filename.
 
 ```sh
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output=cat.jpg
@@ -69,7 +69,7 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o=cat.jpg
 
 ### `--width`
 
-**Optional**: Generated image width in pixels.
+**Optional** (_int_): Generated image width in pixels.
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --width=1024
@@ -83,7 +83,7 @@ diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -W=1024
 
 ### `--height`
 
-**Optional**: Generated image height in pixels.
+**Optional** (_int_): Generated image height in pixels.
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --height=1024
@@ -97,7 +97,7 @@ diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -H=1024
 
 ### `--device`
 
-**Optional**: [Device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
+**Optional** (_str_): [Device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
 
 ```sh
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in the ocean, 8k" --device=cuda
@@ -111,7 +111,7 @@ diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in the ocean, 8k
 
 ### `--negative-prompt`
 
-**Optional**: What to exclude from the generated image.
+**Optional** (_str_): What to exclude from the generated image.
 
 ```sh
 diffused stabilityai/stable-diffusion-2 "photo of an apple" --negative-prompt="blurry, bright photo, red"
@@ -125,7 +125,7 @@ diffused stabilityai/stable-diffusion-2 "photo of an apple" -np="blurry, bright 
 
 ### `--guidance-scale`
 
-**Optional**: How much the prompt influences image generation. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
+**Optional** (_int_): How much the prompt influences image generation. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
 
 ```sh
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" --guidance-scale=7.5
@@ -139,7 +139,7 @@ diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" -gs
 
 ### `--inference-steps`
 
-**Optional**: Number of diffusion steps used during image generation. The more steps you use, the higher the quality, but the generation time will increase.
+**Optional** (_int_): Number of diffusion steps used during image generation. The more steps you use, the higher the quality, but the generation time will increase.
 
 ```sh
 diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" --inference-steps=50
@@ -149,6 +149,14 @@ With the short option:
 
 ```sh
 diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" -is=50
+```
+
+### `--no-safetensors`
+
+**Optional** (_bool_): Disable [safetensors](https://huggingface.co/docs/diffusers/main/en/using-diffusers/using_safetensors).
+
+```sh
+diffused runwayml/stable-diffusion-v1-5 "astronaut on mars" --no-safetensors
 ```
 
 ### `--version`

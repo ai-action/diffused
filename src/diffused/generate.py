@@ -13,6 +13,7 @@ class Generate(TypedDict):
     negative_prompt: NotRequired[str]
     guidance_scale: NotRequired[float]
     num_inference_steps: NotRequired[int]
+    use_safetensors: NotRequired[bool]
 
 
 def generate(**kwargs: Unpack[Generate]) -> Image.Image:
@@ -28,6 +29,7 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         negative_prompt (str): What to exclude from the generated image.
         guidance_scale (float): How much the prompt influences image generation.
         num_inference_steps (int): Number of diffusion steps used for generation.
+        use_safetensors (bool): Whether to load safetensors.
 
     Returns:
         image (PIL.Image.Image): Pillow image.
@@ -43,6 +45,7 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         "width": kwargs.get("width"),
         "height": kwargs.get("height"),
         "negative_prompt": kwargs.get("negative_prompt"),
+        "use_safetensors": kwargs.get("use_safetensors", True),
     }
 
     if kwargs.get("guidance_scale"):
