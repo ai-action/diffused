@@ -1,11 +1,11 @@
-from argparse import ArgumentParser
+import argparse
 from uuid import uuid1
 
 from diffused import __version__, generate
 
 
 def main(argv: list[str] = None) -> None:
-    parser = ArgumentParser(description="Generate image with diffusion model")
+    parser = argparse.ArgumentParser(description="Generate image with diffusion model")
 
     parser.add_argument(
         "--version",
@@ -70,6 +70,13 @@ def main(argv: list[str] = None) -> None:
         type=int,
     )
 
+    parser.add_argument(
+        "--safetensors",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="use safetensors [default: True]",
+    )
+
     args = parser.parse_args(argv)
     generate_args = {
         "model": args.model,
@@ -80,6 +87,7 @@ def main(argv: list[str] = None) -> None:
         "negative_prompt": args.negative_prompt,
         "guidance_scale": args.guidance_scale,
         "num_inference_steps": args.inference_steps,
+        "use_safetensors": args.safetensors,
     }
 
     filename = args.output if args.output else f"{uuid1()}.png"

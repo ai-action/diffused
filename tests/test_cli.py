@@ -200,3 +200,25 @@ def test_inference_steps_short(
     mock_save.assert_called_once()
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_safetensors(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "--safetensors"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+@patch("PIL.Image.Image.save")
+def test_no_safetensors(
+    mock_from_pretrained: Mock, mock_save: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main(["model", "prompt", "--no-safetensors"])
+    mock_save.assert_called_once()
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
