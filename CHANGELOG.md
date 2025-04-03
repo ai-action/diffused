@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/ai-action/diffused/compare/v0.5.1...v0.6.0) (2025-04-03)
+
+
+### Features
+
+* add `num_inference_steps` ([c2cbb05](https://github.com/ai-action/diffused/commit/c2cbb0570319104c5dbf2fb24b13af60a89cb4b3))
+
 ## [0.5.1](https://github.com/ai-action/diffused/compare/v0.5.0...v0.5.1) (2025-04-03)
 
 
