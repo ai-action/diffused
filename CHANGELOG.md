@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/ai-action/diffused/compare/v0.5.0...v0.5.1) (2025-04-03)
+
+
+### Bug Fixes
+
+* **pyproject:** require python &gt;=3.9 ([55c374f](https://github.com/ai-action/diffused/commit/55c374fb73b764c5eb42e4508a621506cbbdac25))
+
 ## [0.5.0](https://github.com/ai-action/diffused/compare/v0.4.2...v0.5.0) (2025-04-02)
 
 ### Features
