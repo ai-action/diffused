@@ -63,6 +63,13 @@ def main(argv: list[str] = None) -> None:
         type=float,
     )
 
+    parser.add_argument(
+        "--inference-steps",
+        "-is",
+        help="number of diffusion steps",
+        type=int,
+    )
+
     args = parser.parse_args(argv)
     generate_args = {
         "model": args.model,
@@ -72,6 +79,7 @@ def main(argv: list[str] = None) -> None:
         "device": args.device,
         "negative_prompt": args.negative_prompt,
         "guidance_scale": args.guidance_scale,
+        "num_inference_steps": args.inference_steps,
     }
 
     filename = args.output if args.output else f"{uuid1()}.png"

@@ -12,6 +12,7 @@ class Generate(TypedDict):
     device: NotRequired[str]
     negative_prompt: NotRequired[str]
     guidance_scale: NotRequired[float]
+    num_inference_steps: NotRequired[int]
 
 
 def generate(**kwargs: Unpack[Generate]) -> Image.Image:
@@ -26,6 +27,7 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         device (str): Device to accelerate computation (cpu, cuda, mps).
         negative_prompt (str): What to exclude from the generated image.
         guidance_scale (float): How much the prompt influences image generation.
+        num_inference_steps (int): Number of diffusion steps used for generation.
 
     Returns:
         image (PIL.Image.Image): Pillow image.
@@ -43,9 +45,11 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         "negative_prompt": kwargs.get("negative_prompt"),
     }
 
-    guidance_scale = kwargs.get("guidance_scale")
-    if guidance_scale:
-        pipeline_args["guidance_scale"] = guidance_scale
+    if kwargs.get("guidance_scale"):
+        pipeline_args["guidance_scale"] = kwargs.get("guidance_scale")
+
+    if kwargs.get("num_inference_steps"):
+        pipeline_args["num_inference_steps"] = kwargs.get("num_inference_steps")
 
     images = pipeline(**pipeline_args).images
     return images[0]
