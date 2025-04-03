@@ -1,23 +1,43 @@
 [project]
 name = "diffused"
 version = "0.5.0"
-authors = [
-    { name="Mark", email="mark@remarkablemark.org" },
-]
 description = "Generate images with diffusion models"
-readme = "README.md"
-requires-python = ">=3.10"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-]
-license = "MIT"
-license-files = ["LICENSE"]
+requires-python = ">=3.9"
 dependencies = [
     "accelerate>=1.5.0",
     "diffusers>=0.32.0",
     "torch>=2.6.0",
     "transformers>=4.50.0",
+]
+authors = [
+    { name="Mark", email="mark@remarkablemark.org" },
+]
+maintainers = [
+    { name="Mark", email="mark@remarkablemark.org" },
+]
+readme = "README.md"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = [
+    "ai",
+    "artificial intelligence",
+    "cli",
+    "diffusers",
+    "diffusion",
+    "machine learning",
+    "pytorch",
+    "stable diffusion",
+    "text-to-image",
 ]
 
 [project.scripts]
@@ -48,7 +68,10 @@ test = [
 
 [project.urls]
 Homepage = "https://github.com/ai-action/diffused"
+Documentation = "https://ai-action.github.io/diffused/"
+Repository = "https://github.com/ai-action/diffused"
 Issues = "https://github.com/ai-action/diffused/issues"
+Changelog = "https://github.com/ai-action/diffused/blob/master/CHANGELOG.md"
 
 [tool.black]
 fast = true
