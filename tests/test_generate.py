@@ -3,11 +3,11 @@ from unittest.mock import Mock, create_autospec, patch
 from diffused import generate
 
 
-def pipeline(prompt, width, height, negative_prompt, guidance_scale=None):
+def pipeline(**kwargs):
     pass  # pragma: no cover
 
 
-def pipeline_to(device):
+def pipeline_to(*args):
     pass  # pragma: no cover
 
 
@@ -19,55 +19,40 @@ mock_pipeline = create_autospec(pipeline)
     "diffusers.AutoPipelineForText2Image.from_pretrained", return_value=mock_pipeline
 )
 def test_generate(mock_from_pretrained: Mock) -> None:
-    model = "model/test"
-    prompt = "test prompt"
-    image = generate(model, prompt)
+    model = "test/model"
+    pipeline_args = {
+        "prompt": "test prompt",
+        "width": None,
+        "height": None,
+        "negative_prompt": None,
+    }
+
+    image = generate(model=model, prompt=pipeline_args["prompt"])
     assert isinstance(image, Mock)
     mock_from_pretrained.assert_called_once_with(model)
-
-    mock_pipeline.assert_called_once_with(
-        prompt=prompt,
-        width=None,
-        height=None,
-        negative_prompt=None,
-    )
-
-    mock_pipeline.to.assert_called_once_with(None)
+    mock_pipeline.assert_called_once_with(**pipeline_args)
+    mock_pipeline.to.assert_not_called()
     mock_pipeline.reset_mock()
-    mock_pipeline.to.reset_mock()
 
 
 @patch(
     "diffusers.AutoPipelineForText2Image.from_pretrained", return_value=mock_pipeline
 )
 def test_generate_arguments(mock_from_pretrained: Mock) -> None:
-    model = "model/test"
-    prompt = "test prompt"
-    negative_prompt = "test negative prompt"
-    width = 1024
-    height = 1024
+    model = "test/model"
     device = "cuda"
-    guidance_scale = 7.5
+    pipeline_args = {
+        "prompt": "test prompt",
+        "negative_prompt": "test negative prompt",
+        "width": 1024,
+        "height": 1024,
+        "guidance_scale": 7.5,
+    }
 
-    image = generate(
-        model=model,
-        prompt=prompt,
-        width=width,
-        height=height,
-        device=device,
-        negative_prompt=negative_prompt,
-        guidance_scale=guidance_scale,
-    )
-
+    image = generate(model=model, device=device, **pipeline_args)
     assert isinstance(image, Mock)
     mock_from_pretrained.assert_called_once_with(model)
-    mock_pipeline.assert_called_once_with(
-        prompt=prompt,
-        width=width,
-        height=height,
-        negative_prompt=negative_prompt,
-        guidance_scale=guidance_scale,
-    )
+    mock_pipeline.assert_called_once_with(**pipeline_args)
     mock_pipeline.to.assert_called_once_with(device)
     mock_pipeline.reset_mock()
     mock_pipeline.to.reset_mock()

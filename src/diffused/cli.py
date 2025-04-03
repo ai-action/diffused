@@ -64,18 +64,18 @@ def main(argv: list[str] = None) -> None:
     )
 
     args = parser.parse_args(argv)
-
-    image = generate(
-        model=args.model,
-        prompt=args.prompt,
-        width=args.width,
-        height=args.height,
-        device=args.device,
-        negative_prompt=args.negative_prompt,
-        guidance_scale=args.guidance_scale,
-    )
+    generate_args = {
+        "model": args.model,
+        "prompt": args.prompt,
+        "width": args.width,
+        "height": args.height,
+        "device": args.device,
+        "negative_prompt": args.negative_prompt,
+        "guidance_scale": args.guidance_scale,
+    }
 
     filename = args.output if args.output else f"{uuid1()}.png"
+    image = generate(**generate_args)
     image.save(filename)
     print(f"🤗 {filename}")
 

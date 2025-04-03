@@ -1,16 +1,20 @@
+from typing import NotRequired, TypedDict, Unpack
+
 from diffusers import AutoPipelineForText2Image
 from PIL import Image
 
 
-def generate(
-    model: str,
-    prompt: str,
-    width: int | None = None,
-    height: int | None = None,
-    device: str | None = None,
-    negative_prompt: str | None = None,
-    guidance_scale: float | None = None,
-) -> Image.Image:
+class Generate(TypedDict):
+    model: str
+    prompt: str
+    width: NotRequired[int]
+    height: NotRequired[int]
+    device: NotRequired[str]
+    negative_prompt: NotRequired[str]
+    guidance_scale: NotRequired[float]
+
+
+def generate(**kwargs: Unpack[Generate]) -> Image.Image:
     """
     Generate image with diffusion model.
 
@@ -26,23 +30,22 @@ def generate(
     Returns:
         image (PIL.Image.Image): Pillow image.
     """
-    pipeline = AutoPipelineForText2Image.from_pretrained(model)
-    pipeline.to(device)
+    pipeline = AutoPipelineForText2Image.from_pretrained(kwargs.get("model"))
 
+    device = kwargs.get("device")
+    if device:
+        pipeline.to(device)
+
+    pipeline_args = {
+        "prompt": kwargs.get("prompt"),
+        "width": kwargs.get("width"),
+        "height": kwargs.get("height"),
+        "negative_prompt": kwargs.get("negative_prompt"),
+    }
+
+    guidance_scale = kwargs.get("guidance_scale")
     if guidance_scale:
-        images = pipeline(
-            prompt=prompt,
-            width=width,
-            height=height,
-            negative_prompt=negative_prompt,
-            guidance_scale=guidance_scale,
-        ).images
-    else:
-        images = pipeline(
-            prompt=prompt,
-            width=width,
-            height=height,
-            negative_prompt=negative_prompt,
-        ).images
+        pipeline_args["guidance_scale"] = guidance_scale
 
+    images = pipeline(**pipeline_args).images
     return images[0]
