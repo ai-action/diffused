@@ -33,6 +33,7 @@ keywords = [
     "cli",
     "diffusers",
     "diffusion",
+    "image-to-image",
     "machine learning",
     "pytorch",
     "stable diffusion",

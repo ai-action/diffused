@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/ai-action/diffused/graph/badge.svg?token=fObC6rYkAJ)](https://codecov.io/gh/ai-action/diffused)
 [![lint](https://github.com/ai-action/diffused/actions/workflows/lint.yml/badge.svg)](https://github.com/ai-action/diffused/actions/workflows/lint.yml)
 
-🤗 Generate images with diffusion [models](https://huggingface.co/models?pipeline_tag=text-to-image):
+🤗 Generate images with diffusion [models](https://huggingface.co/models):
 
 ```sh
 diffused <model> <prompt>
@@ -12,16 +12,16 @@ diffused <model> <prompt>
 
 ## Quick Start
 
-Generate an image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
+[Text-to-image](https://huggingface.co/docs/diffusers/using-diffusers/conditional_image_generation):
 
 ```sh
-pipx run diffused segmind/tiny-sd "portrait of a cat"
+pipx run diffused segmind/tiny-sd "red apple"
 ```
 
-Generate an image with [model](https://huggingface.co/OFA-Sys/small-stable-diffusion-v0), prompt, and filename:
+[Image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img):
 
 ```sh
-pipx run diffused OFA-Sys/small-stable-diffusion-v0 "cartoon of a cat" --output cat.png
+pipx run diffused OFA-Sys/small-stable-diffusion-v0 "cat wizard" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png
 ```
 
 ## Prerequisites
@@ -39,23 +39,39 @@ pipx install diffused
 
 ### `model`
 
-**Required** (*str*): Text-to-image diffusion [model](https://huggingface.co/models?pipeline_tag=text-to-image).
+**Required** (*str*): The diffusion [model](https://huggingface.co/models).
 
 ```sh
 diffused segmind/SSD-1B "An astronaut riding a green horse"
 ```
 
+See [segmind/SSD-1B](https://huggingface.co/segmind/SSD-1B).
+
 ### `prompt`
 
-**Required** (*str*): Text prompt.
+**Required** (*str*): The text prompt.
 
 ```sh
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eating sushi with a cat in a izakaya, 35mm photograph, film, professional, 4k, highly detailed"
 ```
 
+### `--image`
+
+**Optional** (*str*): The input image path or URL. The initial image is used as a starting point for an [image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img) diffusion process.
+
+```sh
+diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in a desert" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/img2img-init.png
+```
+
+With the short option:
+
+```sh
+diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in a desert" -i=./local/image.png
+```
+
 ### `--output`
 
-**Optional** (*str*): Generated image filename.
+**Optional** (*str*): The output image filename.
 
 ```sh
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output=cat.jpg
@@ -69,7 +85,7 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o=cat.jpg
 
 ### `--width`
 
-**Optional** (*int*): Generated image width in pixels.
+**Optional** (*int*): The output image width in pixels.
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --width=1024
@@ -83,7 +99,7 @@ diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -W=1024
 
 ### `--height`
 
-**Optional** (*int*): Generated image height in pixels.
+**Optional** (*int*): The output image height in pixels.
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --height=1024
@@ -97,21 +113,21 @@ diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -H=1024
 
 ### `--device`
 
-**Optional** (*str*): [Device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
+**Optional** (*str*): The [device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
 
 ```sh
-diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in the ocean, 8k" --device=cuda
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" --device=cuda
 ```
 
 With the short option:
 
 ```sh
-diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in the ocean, 8k" -d=cuda
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" -d=cuda
 ```
 
 ### `--negative-prompt`
 
-**Optional** (*str*): What to exclude from the generated image.
+**Optional** (*str*): What to exclude from the output image.
 
 ```sh
 diffused stabilityai/stable-diffusion-2 "photo of an apple" --negative-prompt="blurry, bright photo, red"
@@ -125,7 +141,7 @@ diffused stabilityai/stable-diffusion-2 "photo of an apple" -np="blurry, bright 
 
 ### `--guidance-scale`
 
-**Optional** (*int*): How much the prompt influences image generation. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
+**Optional** (*int*): How much the prompt influences the output image. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
 
 ```sh
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" --guidance-scale=7.5
@@ -139,7 +155,7 @@ diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" -gs
 
 ### `--inference-steps`
 
-**Optional** (*int*): Number of diffusion steps used during image generation. The more steps you use, the higher the quality, but the generation time will increase.
+**Optional** (*int*): The number of diffusion steps used during image generation. The more steps you use, the higher the quality, but the generation time will increase.
 
 ```sh
 diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" --inference-steps=50
@@ -153,7 +169,7 @@ diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" -is=50
 
 ### `--no-safetensors`
 
-**Optional** (*bool*): Disable [safetensors](https://huggingface.co/docs/diffusers/main/en/using-diffusers/using_safetensors).
+**Optional** (*bool*): Whether to disable [safetensors](https://huggingface.co/docs/diffusers/main/en/using-diffusers/using_safetensors).
 
 ```sh
 diffused runwayml/stable-diffusion-v1-5 "astronaut on mars" --no-safetensors
@@ -195,7 +211,7 @@ Install the package:
 pip install diffused
 ```
 
-Generate an image with [model](https://huggingface.co/segmind/tiny-sd) and prompt:
+Generate an image with a [model](https://huggingface.co/segmind/tiny-sd) and a prompt:
 
 ```py
 # script.py
@@ -209,6 +225,12 @@ Run the script:
 
 ```sh
 python script.py
+```
+
+Open the image:
+
+```sh
+open apple.png
 ```
 
 See the [API documentation](https://ai-action.github.io/diffused/diffused/generate.html).
