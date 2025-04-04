@@ -1,6 +1,6 @@
 [project]
 name = "diffused"
-version = "0.6.1"
+version = "0.7.0"
 description = "Generate images with diffusion models"
 requires-python = ">=3.9"
 dependencies = [
