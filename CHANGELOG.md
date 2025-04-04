@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/ai-action/diffused/compare/v0.6.1...v0.7.0) (2025-04-04)
+
+
+### Features
+
+* add image-to-image generation ([58d20a0](https://github.com/ai-action/diffused/commit/58d20a0ed2a6837a78d899b64b49eb65cdd7c516))
+
 ## [0.6.1](https://github.com/ai-action/diffused/compare/v0.6.0...v0.6.1) (2025-04-03)
 
 ### Bug Fixes
