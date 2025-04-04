@@ -25,22 +25,28 @@ def main(argv: list[str] = None) -> None:
     )
 
     parser.add_argument(
+        "--image",
+        "-i",
+        help="input image path/url",
+    )
+
+    parser.add_argument(
         "--output",
         "-o",
-        help="generated image filename",
+        help="output image filename",
     )
 
     parser.add_argument(
         "--width",
         "-W",
-        help="generated image width in pixels",
+        help="output image width (pixels)",
         type=int,
     )
 
     parser.add_argument(
         "--height",
         "-H",
-        help="generated image height in pixels",
+        help="output image height (pixels)",
         type=int,
     )
 
@@ -53,13 +59,13 @@ def main(argv: list[str] = None) -> None:
     parser.add_argument(
         "--negative-prompt",
         "-np",
-        help="what to exclude from the generated image",
+        help="what to exclude from the output image",
     )
 
     parser.add_argument(
         "--guidance-scale",
         "-gs",
-        help="how much the prompt influences image generation",
+        help="how much the prompt influences output image",
         type=float,
     )
 
@@ -81,6 +87,7 @@ def main(argv: list[str] = None) -> None:
     generate_args = {
         "model": args.model,
         "prompt": args.prompt,
+        "image": args.image,
         "width": args.width,
         "height": args.height,
         "device": args.device,

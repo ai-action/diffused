@@ -1,12 +1,13 @@
 from typing import NotRequired, TypedDict, Unpack
 
-from diffusers import AutoPipelineForText2Image
+import diffusers
 from PIL import Image
 
 
 class Generate(TypedDict):
     model: str
     prompt: str
+    image: NotRequired[str]
     width: NotRequired[int]
     height: NotRequired[int]
     device: NotRequired[str]
@@ -23,6 +24,7 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
     Args:
         model (str): Diffusion model.
         prompt (str): Text prompt.
+        image (str): Input image path or URL.
         width (int): Generated image width in pixels.
         height (int): Generated image height in pixels.
         device (str): Device to accelerate computation (cpu, cuda, mps).
@@ -34,12 +36,6 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
     Returns:
         image (PIL.Image.Image): Pillow image.
     """
-    pipeline = AutoPipelineForText2Image.from_pretrained(kwargs.get("model"))
-
-    device = kwargs.get("device")
-    if device:
-        pipeline.to(device)
-
     pipeline_args = {
         "prompt": kwargs.get("prompt"),
         "width": kwargs.get("width"),
@@ -53,6 +49,18 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
 
     if kwargs.get("num_inference_steps"):
         pipeline_args["num_inference_steps"] = kwargs.get("num_inference_steps")
+
+    if kwargs.get("image"):
+        pipeline_args["image"] = diffusers.utils.load_image(kwargs.get("image"))
+        Pipeline = diffusers.AutoPipelineForImage2Image
+    else:
+        Pipeline = diffusers.AutoPipelineForText2Image
+
+    pipeline = Pipeline.from_pretrained(kwargs.get("model"))
+
+    device = kwargs.get("device")
+    if device:
+        pipeline.to(device)
 
     images = pipeline(**pipeline_args).images
     return images[0]
