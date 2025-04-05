@@ -8,6 +8,7 @@ class Generate(TypedDict):
     model: str
     prompt: str
     image: NotRequired[str]
+    mask_image: NotRequired[str]
     width: NotRequired[int]
     height: NotRequired[int]
     device: NotRequired[str]
@@ -25,6 +26,7 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         model (str): Diffusion model.
         prompt (str): Text prompt.
         image (str): Input image path or URL.
+        mask_image (str): Mask image path or URL.
         width (int): Generated image width in pixels.
         height (int): Generated image height in pixels.
         device (str): Device to accelerate computation (cpu, cuda, mps).
@@ -50,11 +52,17 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
     if kwargs.get("num_inference_steps"):
         pipeline_args["num_inference_steps"] = kwargs.get("num_inference_steps")
 
+    Pipeline = diffusers.AutoPipelineForText2Image
+
     if kwargs.get("image"):
         pipeline_args["image"] = diffusers.utils.load_image(kwargs.get("image"))
         Pipeline = diffusers.AutoPipelineForImage2Image
-    else:
-        Pipeline = diffusers.AutoPipelineForText2Image
+
+    if kwargs.get("mask_image"):
+        pipeline_args["mask_image"] = diffusers.utils.load_image(
+            kwargs.get("mask_image")
+        )
+        Pipeline = diffusers.AutoPipelineForInpainting
 
     pipeline = Pipeline.from_pretrained(kwargs.get("model"))
 
