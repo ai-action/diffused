@@ -187,6 +187,20 @@ With the short option:
 diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" -is=50
 ```
 
+### `--strength`
+
+**Optional** (*float*): The noise added to the input image, which determines how much the output image deviates from the original image. Strength is used for [image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img#strength) and [inpainting](https://huggingface.co/docs/diffusers/using-diffusers/inpaint#strength) tasks and is a multiplier to the number of denoising steps (`--inference-steps`).
+
+```sh
+diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in swamp" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/img2img-sdxl-init.png --strength=0.5
+```
+
+With the short option:
+
+```sh
+diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in swamp" -i=image.png -s=0.5
+```
+
 ### `--no-safetensors`
 
 **Optional** (*bool*): Whether to disable [safetensors](https://huggingface.co/docs/diffusers/main/en/using-diffusers/using_safetensors).

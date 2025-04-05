@@ -15,6 +15,7 @@ class Generate(TypedDict):
     negative_prompt: NotRequired[str]
     guidance_scale: NotRequired[float]
     num_inference_steps: NotRequired[int]
+    strength: NotRequired[float]
     use_safetensors: NotRequired[bool]
 
 
@@ -33,6 +34,7 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         negative_prompt (str): What to exclude from the generated image.
         guidance_scale (float): How much the prompt influences image generation.
         num_inference_steps (int): Number of diffusion steps used for generation.
+        strength (float): How much noise is added to the input image.
         use_safetensors (bool): Whether to load safetensors.
 
     Returns:
@@ -51,6 +53,9 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
 
     if kwargs.get("num_inference_steps"):
         pipeline_args["num_inference_steps"] = kwargs.get("num_inference_steps")
+
+    if kwargs.get("strength"):
+        pipeline_args["strength"] = kwargs.get("strength")
 
     Pipeline = diffusers.AutoPipelineForText2Image
 

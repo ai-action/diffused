@@ -51,6 +51,7 @@ def test_text_to_image_with_arguments(mock_from_pretrained: Mock) -> None:
         "height": 1024,
         "guidance_scale": 7.5,
         "num_inference_steps": 50,
+        "strength": 0.5,
         "use_safetensors": False,
     }
     image = generate(model=model, device=device, **pipeline_args)
