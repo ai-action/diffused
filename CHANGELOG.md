@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.9.0](https://github.com/ai-action/diffused/compare/v0.8.1...v0.9.0) (2025-04-05)
+
+
+### Features
+
+* add strength ([c201cd4](https://github.com/ai-action/diffused/commit/c201cd4c19da30f960f00e5ce4d6cb882ff66c60))
+
+
+### Bug Fixes
+
+* don't incorrectly skip zero values for arguments ([a993652](https://github.com/ai-action/diffused/commit/a993652907b348968243822a254c99a58d1ca80e))
+
 ## [0.8.1](https://github.com/ai-action/diffused/compare/v0.8.0...v0.8.1) (2025-04-05)
 
 
