@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/ai-action/diffused/compare/v0.8.0...v0.8.1) (2025-04-05)
+
+
+### Miscellaneous Chores
+
+* **pyproject:** tidy description and add keyword ([230ebb3](https://github.com/ai-action/diffused/commit/230ebb3bf1b6f56895b5b5b2bc532f9d6432e331))
+
 ## [0.8.0](https://github.com/ai-action/diffused/compare/v0.7.0...v0.8.0) (2025-04-05)
 
 ### Features
