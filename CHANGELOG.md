@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.7.0](https://github.com/ai-action/diffused/compare/v0.6.1...v0.7.0) (2025-04-04)
+## [0.8.0](https://github.com/ai-action/diffused/compare/v0.7.0...v0.8.0) (2025-04-05)
 
+### Features
+
+* add inpainting ([91ebe5d](https://github.com/ai-action/diffused/commit/91ebe5dd2ff53a111fabddd767a3a517cf05ec6e))
+
+## [0.7.0](https://github.com/ai-action/diffused/compare/v0.6.1...v0.7.0) (2025-04-04)
 
 ### Features
 
