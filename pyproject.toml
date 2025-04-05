@@ -1,7 +1,7 @@
 [project]
 name = "diffused"
 version = "0.8.0"
-description = "Generate images with diffusion models"
+description = "Generate images with diffusion models."
 requires-python = ">=3.9"
 dependencies = [
     "accelerate>=1.5.0",
@@ -34,6 +34,7 @@ keywords = [
     "diffusers",
     "diffusion",
     "image-to-image",
+    "inpainting",
     "machine learning",
     "pytorch",
     "stable diffusion",
