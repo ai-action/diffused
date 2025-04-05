@@ -63,6 +63,28 @@ def test_text_to_image_with_arguments(mock_from_pretrained: Mock) -> None:
     mock_pipeline.to.reset_mock()
 
 
+@patch(
+    "diffusers.AutoPipelineForText2Image.from_pretrained", return_value=mock_pipeline
+)
+def test_arguments_with_zero_values(mock_from_pretrained: Mock) -> None:
+    pipeline_args = {
+        "prompt": prompt,
+        "width": None,
+        "height": None,
+        "negative_prompt": None,
+        "use_safetensors": True,
+        "guidance_scale": 0,
+        "num_inference_steps": 0,
+        "strength": 0,
+    }
+    image = generate(model=model, **pipeline_args)
+    assert isinstance(image, Mock)
+    mock_from_pretrained.assert_called_once_with(model)
+    mock_pipeline.assert_called_once_with(**pipeline_args)
+    mock_pipeline.to.assert_not_called()
+    mock_pipeline.reset_mock()
+
+
 @patch("diffusers.utils.load_image")
 @patch(
     "diffusers.AutoPipelineForImage2Image.from_pretrained", return_value=mock_pipeline

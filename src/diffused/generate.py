@@ -48,14 +48,17 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         "use_safetensors": kwargs.get("use_safetensors", True),
     }
 
-    if kwargs.get("guidance_scale"):
-        pipeline_args["guidance_scale"] = kwargs.get("guidance_scale")
+    guidance_scale = kwargs.get("guidance_scale")
+    if guidance_scale is not None and guidance_scale >= 0:
+        pipeline_args["guidance_scale"] = guidance_scale
 
-    if kwargs.get("num_inference_steps"):
-        pipeline_args["num_inference_steps"] = kwargs.get("num_inference_steps")
+    num_inference_steps = kwargs.get("num_inference_steps")
+    if num_inference_steps is not None and num_inference_steps >= 0:
+        pipeline_args["num_inference_steps"] = num_inference_steps
 
-    if kwargs.get("strength"):
-        pipeline_args["strength"] = kwargs.get("strength")
+    strength = kwargs.get("strength")
+    if strength is not None and strength >= 0:
+        pipeline_args["strength"] = strength
 
     Pipeline = diffusers.AutoPipelineForText2Image
 
