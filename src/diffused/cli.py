@@ -83,6 +83,13 @@ def main(argv: list[str] = None) -> None:
     )
 
     parser.add_argument(
+        "--strength",
+        "-s",
+        help="how much noise is added to the input image",
+        type=float,
+    )
+
+    parser.add_argument(
         "--safetensors",
         action=argparse.BooleanOptionalAction,
         default=True,
@@ -101,6 +108,7 @@ def main(argv: list[str] = None) -> None:
         "negative_prompt": args.negative_prompt,
         "guidance_scale": args.guidance_scale,
         "num_inference_steps": args.inference_steps,
+        "strength": args.strength,
         "use_safetensors": args.safetensors,
     }
 

@@ -188,6 +188,24 @@ def test_inference_steps_short(
 
 
 @patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+def test_strength(mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture) -> None:
+    main([model, "prompt", "--strength", "0.5"])
+    mock_from_pretrained.assert_called_once_with(model)
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+def test_strength_short(
+    mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main([model, "prompt", "-s", "0.5"])
+    mock_from_pretrained.assert_called_once_with(model)
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
 def test_safetensors(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
