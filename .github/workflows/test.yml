@@ -60,14 +60,22 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arguments:
-          - apple
-          - apple --output apple.jpg --width=512 --height=512 --device=cpu --negative-prompt=blurry --inference-steps=25
-          - apple -o apple.png -W 256 -H 256 -d cpu -np dark -gs 9.5 -is 75
-          - tiger --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png --inference-steps=10
-          - astro -i tests/img2img.png --no-safetensors
-          - cat --image tests/inpaint.png --mask-image tests/inpaint_mask.png --inference-steps 25
-          - cat -i tests/inpaint.png -mi tests/inpaint_mask.png --no-safetensors -is 25
+        test:
+          - task: text-to-image
+            args: apple
+          - task: text-to-image
+            args: apple --output apple.jpg --width=512 --height=512 --device=cpu --negative-prompt=blurry --inference-steps=25
+          - task: text-to-image
+            args: apple -o apple.png -W 256 -H 256 -d cpu -np dark -gs 9.5 -is 75
+          - task: image-to-image
+            args: tiger --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png --inference-steps=10
+          - task: image-to-image
+            args: astro -i tests/img2img.png --no-safetensors
+          - task: inpainting
+            args: cat --image tests/inpaint.png --mask-image tests/inpaint_mask.png --inference-steps 25
+          - task: inpainting
+            args: cat -i tests/inpaint.png -mi tests/inpaint_mask.png --no-safetensors -is 25
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -88,14 +96,14 @@ jobs:
         run: pipx install .
 
       - name: Generate image
-        run: diffused segmind/tiny-sd ${{ matrix.arguments }}
+        run: diffused segmind/tiny-sd ${{ matrix.test.args }}
         env:
           DO_NOT_TRACK: 1
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact-${{ hashFiles('**/*.jpg', '**/*.png') }}
+          name: ${{ matrix.test.task }}-${{ hashFiles('**/*.jpg', '**/*.png') }}
           path: |
             *.jpg
             *.png
