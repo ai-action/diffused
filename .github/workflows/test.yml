@@ -62,10 +62,12 @@ jobs:
       matrix:
         arguments:
           - apple
-          - apple --output apple.jpg --width=512 --height=512 --device=cpu --negative-prompt=blurry --inference-steps=15
-          - apple -o apple.png -W 256 -H 256 -d cpu -np dark -gs 9.5 -is 50
-          - tiger --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png --inference-steps=10 --safetensors
+          - apple --output apple.jpg --width=512 --height=512 --device=cpu --negative-prompt=blurry --inference-steps=25
+          - apple -o apple.png -W 256 -H 256 -d cpu -np dark -gs 9.5 -is 75
+          - tiger --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png --inference-steps=10
           - astro -i tests/img2img.png --no-safetensors
+          - cat --image tests/inpaint.png --mask-image tests/inpaint_mask.png --inference-steps 25
+          - cat -i tests/inpaint.png -mi tests/inpaint_mask.png --no-safetensors -is 25
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

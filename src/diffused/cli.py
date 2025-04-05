@@ -31,6 +31,12 @@ def main(argv: list[str] = None) -> None:
     )
 
     parser.add_argument(
+        "--mask-image",
+        "-mi",
+        help="mask image path/url",
+    )
+
+    parser.add_argument(
         "--output",
         "-o",
         help="output image filename",
@@ -88,6 +94,7 @@ def main(argv: list[str] = None) -> None:
         "model": args.model,
         "prompt": args.prompt,
         "image": args.image,
+        "mask_image": args.mask_image,
         "width": args.width,
         "height": args.height,
         "device": args.device,

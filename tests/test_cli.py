@@ -1,10 +1,14 @@
 import re
-from unittest.mock import Mock, patch
+from unittest.mock import Mock, call, patch
 
 import pytest
 
 from diffused import __version__
 from diffused.cli import main
+
+model = "test/model"
+image = "image.png"
+mask_image = "mask.png"
 
 
 def test_version(capsys: pytest.LogCaptureFixture) -> None:
@@ -45,7 +49,7 @@ def test_no_arguments(capsys: pytest.LogCaptureFixture) -> None:
 
 def test_invalid_argument(capsys: pytest.LogCaptureFixture) -> None:
     with pytest.raises(SystemExit) as exception:
-        main(["model", "prompt", "--invalid"])
+        main([model, "prompt", "--invalid"])
     captured = capsys.readouterr()
     assert exception.type is SystemExit
     assert "error: unrecognized arguments: --invalid" in captured.err
@@ -55,8 +59,8 @@ def test_invalid_argument(capsys: pytest.LogCaptureFixture) -> None:
 def test_generate_image(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert (
         re.match(
@@ -69,30 +73,28 @@ def test_generate_image(
 
 @patch("diffusers.AutoPipelineForText2Image.from_pretrained")
 def test_output(mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture) -> None:
-    filename = "image.png"
-    main(["model", "prompt", "--output", filename])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "--output", image])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
-    assert captured.out == f"🤗 {filename}\n"
+    assert captured.out == f"🤗 {image}\n"
 
 
 @patch("diffusers.AutoPipelineForText2Image.from_pretrained")
 def test_output_short(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    filename = "image.png"
-    main(["model", "prompt", "-o", filename])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "-o", image])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
-    assert captured.out == f"🤗 {filename}\n"
+    assert captured.out == f"🤗 {image}\n"
 
 
 @patch("diffusers.AutoPipelineForText2Image.from_pretrained")
 def test_width_height(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "--width", "1024", "--height", "1024"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "--width", "1024", "--height", "1024"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -101,16 +103,16 @@ def test_width_height(
 def test_width_height_short(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "-W", "1024", "-H", "1024"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "-W", "1024", "-H", "1024"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
 
 @patch("diffusers.AutoPipelineForText2Image.from_pretrained")
 def test_device(mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture) -> None:
-    main(["model", "prompt", "--device", "cuda"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "--device", "cuda"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -119,8 +121,8 @@ def test_device(mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture) ->
 def test_device_short(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "-d", "cpu"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "-d", "cpu"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -129,8 +131,8 @@ def test_device_short(
 def test_negative_prompt(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "--negative-prompt", "blurry"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "--negative-prompt", "blurry"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -139,8 +141,8 @@ def test_negative_prompt(
 def test_negative_prompt_short(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "-np", "blurry"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "-np", "blurry"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -149,8 +151,8 @@ def test_negative_prompt_short(
 def test_guidance_scale(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "--guidance-scale", "7.5"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "--guidance-scale", "7.5"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -159,8 +161,8 @@ def test_guidance_scale(
 def test_guidance_scale_short(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "-gs", "7.5"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "-gs", "7.5"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -169,8 +171,8 @@ def test_guidance_scale_short(
 def test_inference_steps(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "--inference-steps", "50"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "--inference-steps", "50"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -179,8 +181,8 @@ def test_inference_steps(
 def test_inference_steps_short(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "-is", "15"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "-is", "15"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -189,8 +191,8 @@ def test_inference_steps_short(
 def test_safetensors(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "--safetensors"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "--safetensors"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
@@ -199,32 +201,55 @@ def test_safetensors(
 def test_no_safetensors(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "--no-safetensors"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "--no-safetensors"])
+    mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
 
+@patch("diffusers.utils.load_image")
 @patch("diffusers.AutoPipelineForImage2Image.from_pretrained")
-def test_image(mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture) -> None:
-    main(
-        [
-            "model",
-            "prompt",
-            "--image",
-            "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/img2img-init.png",
-        ]
-    )
-    mock_from_pretrained.assert_called_once()
+def test_image(
+    mock_from_pretrained: Mock, mock_load_image: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main([model, "prompt", "--image", image])
+    mock_from_pretrained.assert_called_once_with(model)
+    mock_load_image.assert_called_once_with(image)
     captured = capsys.readouterr()
     assert "🤗 " in captured.out
 
 
+@patch("diffusers.utils.load_image")
 @patch("diffusers.AutoPipelineForImage2Image.from_pretrained")
 def test_image_short(
-    mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
+    mock_from_pretrained: Mock, mock_load_image: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:
-    main(["model", "prompt", "-i", "tests/img2img.png"])
-    mock_from_pretrained.assert_called_once()
+    main([model, "prompt", "-i", image])
+    mock_from_pretrained.assert_called_once_with(model)
+    mock_load_image.assert_called_once_with(image)
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.utils.load_image")
+@patch("diffusers.AutoPipelineForInpainting.from_pretrained")
+def test_mask_image(
+    mock_from_pretrained: Mock, mock_load_image: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main([model, "prompt", "--image", image, "--mask-image", mask_image])
+    mock_from_pretrained.assert_called_once_with(model)
+    mock_load_image.assert_has_calls([call(image), call(mask_image)])
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.utils.load_image")
+@patch("diffusers.AutoPipelineForInpainting.from_pretrained")
+def test_mask_image_short(
+    mock_from_pretrained: Mock, mock_load_image: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main([model, "prompt", "-i", image, "-mi", mask_image])
+    mock_from_pretrained.assert_called_once_with(model)
+    mock_load_image.assert_has_calls([call(image), call(mask_image)])
     captured = capsys.readouterr()
     assert "🤗 " in captured.out

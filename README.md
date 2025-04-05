@@ -24,6 +24,12 @@ pipx run diffused segmind/tiny-sd "red apple"
 pipx run diffused OFA-Sys/small-stable-diffusion-v0 "cat wizard" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png
 ```
 
+[Inpainting](https://huggingface.co/docs/diffusers/en/using-diffusers/inpaint):
+
+```sh
+pipx run diffused kandinsky-community/kandinsky-2-2-decoder-inpaint "black cat" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint.png --mask-image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint_mask.png
+```
+
 ## Prerequisites
 
 - [Python](https://www.python.org/)
@@ -67,6 +73,20 @@ With the short option:
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in a desert" -i=./local/image.png
+```
+
+### `--mask-image`
+
+**Optional** (*str*): The mask image path or URL. [Inpainting](https://huggingface.co/docs/diffusers/en/using-diffusers/inpaint) replaces or edits specific areas of an image. [Create a mask image](https://huggingface.co/docs/diffusers/en/using-diffusers/inpaint#create-a-mask-image) to inpaint images.
+
+```sh
+diffused kandinsky-community/kandinsky-2-2-decoder-inpaint "black cat" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint.png --mask-image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint_mask.png
+```
+
+With the short option:
+
+```sh
+diffused kandinsky-community/kandinsky-2-2-decoder-inpaint "black cat" -i=inpaint.png -mi=inpaint_mask.png
 ```
 
 ### `--output`
