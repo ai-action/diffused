@@ -72,9 +72,9 @@ jobs:
           - task: image-to-image
             args: astro -i tests/img2img.png --no-safetensors
           - task: inpainting
-            args: cat --image tests/inpaint.png --mask-image tests/inpaint_mask.png --strength 0.5 --number 2
+            args: cat --image tests/inpaint.png --mask-image tests/inpaint_mask.png --strength 0.3 --number 2
           - task: inpainting
-            args: cat -i tests/inpaint.png -mi tests/inpaint_mask.png --no-safetensors -s 0.5 -n 2
+            args: cat -i tests/inpaint.png -mi tests/inpaint_mask.png --no-safetensors -s 0.3 -n 2
 
     steps:
       - name: Checkout repository

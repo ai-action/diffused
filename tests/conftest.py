@@ -13,7 +13,7 @@ class Pipeline:
 
     def __init__(self, **kwargs):
         Pipeline.mock(**kwargs)
-        Pipeline.images = [Mock()] * kwargs.get("num_images_per_prompt")
+        Pipeline.images = [Mock() for _ in range(kwargs.get("num_images_per_prompt"))]
 
     @staticmethod
     def reset_mock():

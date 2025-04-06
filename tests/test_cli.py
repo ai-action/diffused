@@ -121,7 +121,8 @@ def test_number_short(
     mock_from_pretrained.assert_called_once_with(model)
     captured = capsys.readouterr()
     assert len(Pipeline.images) == 10
-    assert Pipeline.images[0].save.call_count == 10
+    for img in Pipeline.images:
+        img.save.assert_called_once()
     assert "🤗 test01.jpg" in captured.out
     assert "🤗 test10.jpg" in captured.out
 
