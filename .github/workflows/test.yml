@@ -64,9 +64,9 @@ jobs:
           - task: text-to-image
             args: apple
           - task: text-to-image
-            args: apple --output apple.jpg --width=512 --height=512 --device=cpu --negative-prompt=blurry --inference-steps=25
+            args: apple --output apple.jpg --width=512 --height=512 --device=cpu --negative-prompt=blurry --inference-steps=25 --seed=0
           - task: text-to-image
-            args: apple -o apple.png -W 256 -H 256 -d cpu -np dark -gs 9.5 -is 75
+            args: apple -o apple.png -W 256 -H 256 -d cpu -np dark -gs 9.5 -is 75 -S -1
           - task: image-to-image
             args: tiger --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png --inference-steps=10
           - task: image-to-image

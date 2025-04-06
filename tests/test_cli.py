@@ -206,6 +206,24 @@ def test_strength_short(
 
 
 @patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+def test_seed(mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture) -> None:
+    main([model, "prompt", "--seed", "0"])
+    mock_from_pretrained.assert_called_once_with(model)
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
+def test_seed_short(
+    mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
+) -> None:
+    main([model, "prompt", "-S", "-1"])
+    mock_from_pretrained.assert_called_once_with(model)
+    captured = capsys.readouterr()
+    assert "🤗 " in captured.out
+
+
+@patch("diffusers.AutoPipelineForText2Image.from_pretrained")
 def test_safetensors(
     mock_from_pretrained: Mock, capsys: pytest.LogCaptureFixture
 ) -> None:

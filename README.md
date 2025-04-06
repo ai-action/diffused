@@ -201,6 +201,20 @@ With the short option:
 diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in swamp" -i=image.png -s=0.5
 ```
 
+### `--seed`
+
+**Optional** (*int*): The seed for generating random numbers, ensuring [reproducibility](https://huggingface.co/docs/diffusers/using-diffusers/reusing_seeds) in image generation pipelines.
+
+```sh
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "Labrador in the style of Vermeer" --seed=0
+```
+
+With the short option:
+
+```sh
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "Labrador in the style of Vermeer" -S=1337
+```
+
 ### `--no-safetensors`
 
 **Optional** (*bool*): Whether to disable [safetensors](https://huggingface.co/docs/diffusers/main/en/using-diffusers/using_safetensors).
