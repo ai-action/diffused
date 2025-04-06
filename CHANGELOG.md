@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/ai-action/diffused/compare/v0.10.0...v0.10.1) (2025-04-06)
+
+
+### Documentation
+
+* **readme:** tidy cli arguments ([bb5ffbe](https://github.com/ai-action/diffused/commit/bb5ffbe0765d341329e324a6de904a9e748ab07d))
+
 ## [0.10.0](https://github.com/ai-action/diffused/compare/v0.9.0...v0.10.0) (2025-04-06)
 
 
