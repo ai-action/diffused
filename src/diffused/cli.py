@@ -1,4 +1,6 @@
 import argparse
+import math
+import os
 from uuid import uuid1
 
 from diffused import __version__, generate
@@ -63,6 +65,14 @@ def main(argv: list[str] = None) -> None:
     )
 
     parser.add_argument(
+        "--number",
+        "-n",
+        default=1,
+        help="number of output images [default: 1]",
+        type=int,
+    )
+
+    parser.add_argument(
         "--guidance-scale",
         "-gs",
         help="how much the prompt influences output image",
@@ -112,6 +122,7 @@ def main(argv: list[str] = None) -> None:
         "mask_image": args.mask_image,
         "model": args.model,
         "negative_prompt": args.negative_prompt,
+        "num_images_per_prompt": args.number,
         "num_inference_steps": args.inference_steps,
         "prompt": args.prompt,
         "seed": args.seed,
@@ -120,10 +131,24 @@ def main(argv: list[str] = None) -> None:
         "width": args.width,
     }
 
-    filename = args.output if args.output else f"{uuid1()}.png"
-    image = generate(**generate_args)
-    image.save(filename)
-    print(f"🤗 {filename}")
+    images = generate(**generate_args)
+    images_length = len(images)
+
+    for index, image in enumerate(images):
+        if args.output:
+            if images_length == 1:
+                filename = args.output
+            else:
+                basename, extension = os.path.splitext(args.output)
+                idx = str(index + 1).rjust(
+                    math.floor(math.log10(images_length)) + 1, "0"
+                )
+                filename = f"{basename}{idx}{extension}"
+        else:
+            filename = f"{uuid1()}.png"
+
+        image.save(filename)
+        print(f"🤗 {filename}")
 
 
 if __name__ == "__main__":  # pragma: no cover

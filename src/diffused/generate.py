@@ -13,6 +13,7 @@ class Generate(TypedDict):
     mask_image: NotRequired[str]
     width: NotRequired[int]
     height: NotRequired[int]
+    num_images_per_prompt: NotRequired[int]
     guidance_scale: NotRequired[float]
     num_inference_steps: NotRequired[int]
     strength: NotRequired[float]
@@ -21,7 +22,7 @@ class Generate(TypedDict):
     use_safetensors: NotRequired[bool]
 
 
-def generate(**kwargs: Unpack[Generate]) -> Image.Image:
+def generate(**kwargs: Unpack[Generate]) -> list[Image.Image]:
     """
     Generate image with diffusion model.
 
@@ -33,6 +34,7 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         mask_image (str): Mask image path or URL.
         width (int): Generated image width in pixels.
         height (int): Generated image height in pixels.
+        num_images_per_prompt (int): Number of images per prompt.
         guidance_scale (float): How much the prompt influences image generation.
         num_inference_steps (int): Number of diffusion steps used for generation.
         strength (float): How much noise is added to the input image.
@@ -41,13 +43,14 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         use_safetensors (bool): Whether to load safetensors.
 
     Returns:
-        image (PIL.Image.Image): Pillow image.
+        images (list[PIL.Image.Image]): Pillow images.
     """
     pipeline_args = {
         "prompt": kwargs.get("prompt"),
+        "negative_prompt": kwargs.get("negative_prompt"),
         "width": kwargs.get("width"),
         "height": kwargs.get("height"),
-        "negative_prompt": kwargs.get("negative_prompt"),
+        "num_images_per_prompt": kwargs.get("num_images_per_prompt", 1),
         "use_safetensors": kwargs.get("use_safetensors", True),
     }
 
@@ -86,4 +89,4 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         pipeline_args["generator"] = torch.Generator(device=device).manual_seed(seed)
 
     images = pipeline(**pipeline_args).images
-    return images[0]
+    return images
