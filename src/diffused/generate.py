@@ -8,16 +8,16 @@ from PIL import Image
 class Generate(TypedDict):
     model: str
     prompt: str
+    negative_prompt: NotRequired[str]
     image: NotRequired[str]
     mask_image: NotRequired[str]
     width: NotRequired[int]
     height: NotRequired[int]
-    device: NotRequired[str]
-    negative_prompt: NotRequired[str]
     guidance_scale: NotRequired[float]
     num_inference_steps: NotRequired[int]
     strength: NotRequired[float]
     seed: NotRequired[int]
+    device: NotRequired[str]
     use_safetensors: NotRequired[bool]
 
 
@@ -28,16 +28,16 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
     Args:
         model (str): Diffusion model.
         prompt (str): Text prompt.
+        negative_prompt (str): What to exclude from the generated image.
         image (str): Input image path or URL.
         mask_image (str): Mask image path or URL.
         width (int): Generated image width in pixels.
         height (int): Generated image height in pixels.
-        device (str): Device to accelerate computation (cpu, cuda, mps).
-        negative_prompt (str): What to exclude from the generated image.
         guidance_scale (float): How much the prompt influences image generation.
         num_inference_steps (int): Number of diffusion steps used for generation.
         strength (float): How much noise is added to the input image.
         seed (int): Seed for generating reproducible images.
+        device (str): Device to accelerate computation (cpu, cuda, mps).
         use_safetensors (bool): Whether to load safetensors.
 
     Returns:

@@ -25,6 +25,12 @@ def main(argv: list[str] = None) -> None:
     )
 
     parser.add_argument(
+        "--negative-prompt",
+        "-np",
+        help="what to exclude from the output image",
+    )
+
+    parser.add_argument(
         "--image",
         "-i",
         help="input image path/url",
@@ -57,18 +63,6 @@ def main(argv: list[str] = None) -> None:
     )
 
     parser.add_argument(
-        "--device",
-        "-d",
-        help="device to accelerate computation (cpu, cuda, mps)",
-    )
-
-    parser.add_argument(
-        "--negative-prompt",
-        "-np",
-        help="what to exclude from the output image",
-    )
-
-    parser.add_argument(
         "--guidance-scale",
         "-gs",
         help="how much the prompt influences output image",
@@ -97,6 +91,12 @@ def main(argv: list[str] = None) -> None:
     )
 
     parser.add_argument(
+        "--device",
+        "-d",
+        help="device to accelerate computation (cpu, cuda, mps)",
+    )
+
+    parser.add_argument(
         "--safetensors",
         action=argparse.BooleanOptionalAction,
         default=True,
@@ -105,19 +105,19 @@ def main(argv: list[str] = None) -> None:
 
     args = parser.parse_args(argv)
     generate_args = {
-        "model": args.model,
-        "prompt": args.prompt,
+        "device": args.device,
+        "guidance_scale": args.guidance_scale,
+        "height": args.height,
         "image": args.image,
         "mask_image": args.mask_image,
-        "width": args.width,
-        "height": args.height,
-        "device": args.device,
+        "model": args.model,
         "negative_prompt": args.negative_prompt,
-        "guidance_scale": args.guidance_scale,
         "num_inference_steps": args.inference_steps,
-        "strength": args.strength,
+        "prompt": args.prompt,
         "seed": args.seed,
+        "strength": args.strength,
         "use_safetensors": args.safetensors,
+        "width": args.width,
     }
 
     filename = args.output if args.output else f"{uuid1()}.png"
