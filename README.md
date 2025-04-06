@@ -145,6 +145,20 @@ With the short option:
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -H=1024
 ```
 
+### `--number`
+
+**Optional** (*int*): The number of output images. Defaults to 1.
+
+```sh
+diffused segmind/tiny-sd apple --number=2
+```
+
+With the short option:
+
+```sh
+diffused segmind/tiny-sd apple -n=2
+```
+
 ### `--guidance-scale`
 
 **Optional** (*int*): How much the prompt influences the output image. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
@@ -265,8 +279,8 @@ Generate an image with a [model](https://huggingface.co/segmind/tiny-sd) and a p
 # script.py
 from diffused import generate
 
-image = generate(model="segmind/tiny-sd", prompt="apple")
-image.save("apple.png")
+images = generate(model="segmind/tiny-sd", prompt="apple")
+images[0].save("apple.png")
 ```
 
 Run the script:
