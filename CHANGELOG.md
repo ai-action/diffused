@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/ai-action/diffused/compare/v0.10.1...v1.0.0) (2025-04-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* `generate` returns a list of images instead of one
+
+### Features
+
+* allow more than one image to be generated with `number` ([918ba7a](https://github.com/ai-action/diffused/commit/918ba7af0fcdd9d35f3fad4f3d0781d620b6e009))
+
 ## [0.10.1](https://github.com/ai-action/diffused/compare/v0.10.0...v0.10.1) (2025-04-06)
 
 
