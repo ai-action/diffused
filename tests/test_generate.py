@@ -1,4 +1,4 @@
-from unittest.mock import Mock, call, create_autospec, patch
+from unittest.mock import ANY, Mock, call, create_autospec, patch
 
 from diffused import generate
 
@@ -63,10 +63,40 @@ def test_text_to_image_with_arguments(mock_from_pretrained: Mock) -> None:
     mock_pipeline.to.reset_mock()
 
 
+@patch("torch.Generator")
 @patch(
     "diffusers.AutoPipelineForText2Image.from_pretrained", return_value=mock_pipeline
 )
-def test_arguments_with_zero_values(mock_from_pretrained: Mock) -> None:
+def test_text_to_image_with_seed(
+    mock_from_pretrained: Mock, mock_generator: Mock
+) -> None:
+    seed = -1
+    pipeline_args = {
+        "prompt": prompt,
+        "width": None,
+        "height": None,
+        "negative_prompt": None,
+        "use_safetensors": True,
+    }
+    image = generate(model=model, device=device, seed=seed, **pipeline_args)
+    assert isinstance(image, Mock)
+    mock_from_pretrained.assert_called_once_with(model)
+    mock_generator.assert_called_once_with(device=device)
+    pipeline_args["generator"] = ANY
+    mock_pipeline.assert_called_once_with(**pipeline_args)
+    mock_pipeline.to.assert_called_once_with(device)
+    mock_pipeline.reset_mock()
+    mock_pipeline.to.reset_mock()
+
+
+@patch("torch.Generator")
+@patch(
+    "diffusers.AutoPipelineForText2Image.from_pretrained", return_value=mock_pipeline
+)
+def test_arguments_with_zero_values(
+    mock_from_pretrained: Mock, mock_generator: Mock
+) -> None:
+    seed = 0
     pipeline_args = {
         "prompt": prompt,
         "width": None,
@@ -77,9 +107,11 @@ def test_arguments_with_zero_values(mock_from_pretrained: Mock) -> None:
         "num_inference_steps": 0,
         "strength": 0,
     }
-    image = generate(model=model, **pipeline_args)
+    image = generate(model=model, seed=seed, **pipeline_args)
     assert isinstance(image, Mock)
     mock_from_pretrained.assert_called_once_with(model)
+    mock_generator.assert_called_once_with(device=None)
+    pipeline_args["generator"] = ANY
     mock_pipeline.assert_called_once_with(**pipeline_args)
     mock_pipeline.to.assert_not_called()
     mock_pipeline.reset_mock()

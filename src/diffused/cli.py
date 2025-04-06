@@ -90,6 +90,13 @@ def main(argv: list[str] = None) -> None:
     )
 
     parser.add_argument(
+        "--seed",
+        "-S",
+        help="seed for generating reproducible images",
+        type=int,
+    )
+
+    parser.add_argument(
         "--safetensors",
         action=argparse.BooleanOptionalAction,
         default=True,
@@ -109,6 +116,7 @@ def main(argv: list[str] = None) -> None:
         "guidance_scale": args.guidance_scale,
         "num_inference_steps": args.inference_steps,
         "strength": args.strength,
+        "seed": args.seed,
         "use_safetensors": args.safetensors,
     }
 

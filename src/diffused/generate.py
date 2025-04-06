@@ -1,6 +1,7 @@
 from typing import NotRequired, TypedDict, Unpack
 
 import diffusers
+import torch
 from PIL import Image
 
 
@@ -16,6 +17,7 @@ class Generate(TypedDict):
     guidance_scale: NotRequired[float]
     num_inference_steps: NotRequired[int]
     strength: NotRequired[float]
+    seed: NotRequired[int]
     use_safetensors: NotRequired[bool]
 
 
@@ -35,6 +37,7 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
         guidance_scale (float): How much the prompt influences image generation.
         num_inference_steps (int): Number of diffusion steps used for generation.
         strength (float): How much noise is added to the input image.
+        seed (int): Seed for generating reproducible images.
         use_safetensors (bool): Whether to load safetensors.
 
     Returns:
@@ -77,6 +80,10 @@ def generate(**kwargs: Unpack[Generate]) -> Image.Image:
     device = kwargs.get("device")
     if device:
         pipeline.to(device)
+
+    seed = kwargs.get("seed")
+    if isinstance(seed, int):
+        pipeline_args["generator"] = torch.Generator(device=device).manual_seed(seed)
 
     images = pipeline(**pipeline_args).images
     return images[0]
