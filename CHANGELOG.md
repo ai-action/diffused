@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/ai-action/diffused/compare/v0.9.0...v0.10.0) (2025-04-06)
+
+
+### Features
+
+* add seed ([64c6c98](https://github.com/ai-action/diffused/commit/64c6c9826994c1ab65693db1ff0ed83a8bfb806d))
+
 ## [0.9.0](https://github.com/ai-action/diffused/compare/v0.8.1...v0.9.0) (2025-04-05)
 
 
