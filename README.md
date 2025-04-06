@@ -61,6 +61,20 @@ See [segmind/SSD-1B](https://huggingface.co/segmind/SSD-1B).
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eating sushi with a cat in a izakaya, 35mm photograph, film, professional, 4k, highly detailed"
 ```
 
+### `--negative-prompt`
+
+**Optional** (*str*): What to exclude from the output image.
+
+```sh
+diffused stabilityai/stable-diffusion-2 "photo of an apple" --negative-prompt="blurry, bright photo, red"
+```
+
+With the short option:
+
+```sh
+diffused stabilityai/stable-diffusion-2 "photo of an apple" -np="blurry, bright photo, red"
+```
+
 ### `--image`
 
 **Optional** (*str*): The input image path or URL. The initial image is used as a starting point for an [image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img) diffusion process.
@@ -131,34 +145,6 @@ With the short option:
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -H=1024
 ```
 
-### `--device`
-
-**Optional** (*str*): The [device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
-
-```sh
-diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" --device=cuda
-```
-
-With the short option:
-
-```sh
-diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" -d=cuda
-```
-
-### `--negative-prompt`
-
-**Optional** (*str*): What to exclude from the output image.
-
-```sh
-diffused stabilityai/stable-diffusion-2 "photo of an apple" --negative-prompt="blurry, bright photo, red"
-```
-
-With the short option:
-
-```sh
-diffused stabilityai/stable-diffusion-2 "photo of an apple" -np="blurry, bright photo, red"
-```
-
 ### `--guidance-scale`
 
 **Optional** (*int*): How much the prompt influences the output image. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
@@ -213,6 +199,20 @@ With the short option:
 
 ```sh
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "Labrador in the style of Vermeer" -S=1337
+```
+
+### `--device`
+
+**Optional** (*str*): The [device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
+
+```sh
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" --device=cuda
+```
+
+With the short option:
+
+```sh
+diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" -d=cuda
 ```
 
 ### `--no-safetensors`
