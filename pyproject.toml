@@ -54,7 +54,7 @@ build = [
     "twine==6.1.0",
 ]
 docs = [
-    "pdoc==15.0.1",
+    "pdoc==15.0.2",
 ]
 lint = [
     "black==25.1.0",
