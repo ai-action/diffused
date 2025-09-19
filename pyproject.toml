@@ -57,7 +57,7 @@ docs = [
     "pdoc==15.0.4",
 ]
 lint = [
-    "black==25.1.0",
+    "black==25.9.0",
     "isort==6.0.1",
     "pre-commit==4.3.0",
     "ruff==0.13.0",
