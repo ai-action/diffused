@@ -113,9 +113,16 @@ def main(argv: list[str] = None) -> None:
         help="use safetensors [default: True]",
     )
 
+    parser.add_argument(
+        "--float16",
+        action=argparse.BooleanOptionalAction,
+        help="load weights in float16",
+    )
+
     args = parser.parse_args(argv)
     generate_args = {
         "device": args.device,
+        "float16": args.float16,
         "guidance_scale": args.guidance_scale,
         "height": args.height,
         "image": args.image,

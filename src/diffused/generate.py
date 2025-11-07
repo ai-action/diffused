@@ -20,6 +20,7 @@ class Generate(TypedDict):
     seed: NotRequired[int]
     device: NotRequired[str]
     use_safetensors: NotRequired[bool]
+    float16: NotRequired[bool]
 
 
 def generate(**kwargs: Unpack[Generate]) -> list[Image.Image]:
@@ -40,7 +41,8 @@ def generate(**kwargs: Unpack[Generate]) -> list[Image.Image]:
         strength (float): How much noise is added to the input image.
         seed (int): Seed for generating reproducible images.
         device (str): Device to accelerate computation (cpu, cuda, mps).
-        use_safetensors (bool): Whether to load safetensors.
+        use_safetensors (bool): Load safetensors.
+        float16 (bool): Load weights in float16 precision.
 
     Returns:
         images (list[PIL.Image.Image]): Pillow images.
@@ -78,7 +80,12 @@ def generate(**kwargs: Unpack[Generate]) -> list[Image.Image]:
         )
         Pipeline = diffusers.AutoPipelineForInpainting
 
-    pipeline = Pipeline.from_pretrained(kwargs.get("model"))
+    if kwargs.get("float16"):
+        pipeline = Pipeline.from_pretrained(
+            kwargs.get("model"), torch_dtype=torch.float16
+        )
+    else:
+        pipeline = Pipeline.from_pretrained(kwargs.get("model"))
 
     device = kwargs.get("device")
     if device:

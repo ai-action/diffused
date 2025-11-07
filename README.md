@@ -237,6 +237,14 @@ diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" -d
 diffused runwayml/stable-diffusion-v1-5 "astronaut on mars" --no-safetensors
 ```
 
+### `--float16`
+
+**Optional** (*bool*): If you're limited by GPU memory, you can load the weights in float16 precision instead of the default float32 precision.
+
+```sh
+diffused CompVis/stable-diffusion-v1-4 "photograph of an astronaut riding a horse" --float16
+```
+
 ### `--version`
 
 Show the program's version number and exit:
