@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/ai-action/diffused/compare/v1.0.0...v1.0.1) (2025-11-17)
+
+
+### Documentation
+
+* **readme:** replace badgen.net with shields.io status badge ([472c28d](https://github.com/ai-action/diffused/commit/472c28dad4154c913e1cc484953d051f1c656e08))
+
 ## [1.0.0](https://github.com/ai-action/diffused/compare/v0.10.1...v1.0.0) (2025-04-06)
 
 
