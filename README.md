@@ -1,6 +1,6 @@
 # diffused
 
-[![PyPI version](https://badgen.net/pypi/v/diffused)](https://pypi.org/project/diffused/)
+[![PyPI version](https://img.shields.io/pypi/v/diffused)](https://pypi.org/project/diffused/)
 [![codecov](https://codecov.io/gh/ai-action/diffused/graph/badge.svg?token=fObC6rYkAJ)](https://codecov.io/gh/ai-action/diffused)
 [![lint](https://github.com/ai-action/diffused/actions/workflows/lint.yml/badge.svg)](https://github.com/ai-action/diffused/actions/workflows/lint.yml)
 
