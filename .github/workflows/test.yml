@@ -101,7 +101,7 @@ jobs:
           DO_NOT_TRACK: 1
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.test.task }}-${{ hashFiles('**/*.jpg', '**/*.png') }}
           path: |
