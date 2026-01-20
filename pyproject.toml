@@ -50,7 +50,7 @@ diffused = "diffused.cli:main"
 [project.optional-dependencies]
 build = [
     "build==1.4.0",
-    "pyinstaller==6.17.0",
+    "pyinstaller==6.18.0",
     "twine==6.2.0",
 ]
 docs = [
