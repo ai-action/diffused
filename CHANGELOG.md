@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/ai-action/diffused/compare/v1.0.1...v1.0.2) (2026-07-16)
+
+
+### Bug Fixes
+
+* **generate:** force float32 dtype to prevent Half/Float mismatch ([2190fb3](https://github.com/ai-action/diffused/commit/2190fb3aff934ab7e4dc4ce598c3cc0d1d5df39d))
+
 ## [1.0.1](https://github.com/ai-action/diffused/compare/v1.0.0...v1.0.1) (2025-11-17)
 
 
