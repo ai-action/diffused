@@ -23,28 +23,22 @@ Install [Python](https://www.python.org/):
 brew install python
 ```
 
-Create the virtual environment:
+Install [uv](https://docs.astral.sh/uv/):
 
 ```sh
-python3 -m venv .venv
-```
-
-Activate the virtual environment:
-
-```sh
-source .venv/bin/activate
+brew install uv
 ```
 
 Install the dependencies:
 
 ```sh
-pip install -e '.[lint]'
+uv sync --all-groups
 ```
 
 Install pre-commit into your git hooks:
 
 ```sh
-pre-commit install
+uv run pre-commit install
 ```
 
 ## Develop
@@ -74,38 +68,38 @@ Things that will improve the chance that your pull request will be accepted:
 
 ## Test
 
-Install the dependencies:
+If you didn't install the dependencies earlier, you can install only the test dependencies:
 
 ```sh
-pip install -e '.[test]'
+uv sync --only-group test
 ```
 
 Run the tests:
 
 ```sh
-pytest
+uv run pytest
 ```
 
 Run the tests with [coverage](https://coverage.readthedocs.io/):
 
 ```sh
-coverage run -m pytest
+uv run coverage run -m pytest
 ```
 
 Generate a coverage report:
 
 ```sh
-coverage report
+uv run coverage report
 ```
 
 ```sh
-coverage html
+uv run coverage html
 ```
 
-Install the package with [pipx](https://pipx.pypa.io/):
+Install the package with [uv](https://docs.astral.sh/uv/):
 
 ```sh
-pipx install . --force
+uv tool install . --force
 ```
 
 Test the command:
@@ -116,80 +110,80 @@ diffused --help
 
 ## Lint
 
-Install the dependencies:
+If you didn't install the dependencies earlier, you can install only the lint dependencies:
 
 ```sh
-pip install -e '.[lint]'
+uv sync --only-group lint
 ```
 
 Update pre-commit hooks to the latest version:
 
 ```sh
-pre-commit autoupdate
+uv run pre-commit autoupdate
 ```
 
 Run all pre-commit hooks:
 
 ```sh
-pre-commit run --all-files
+uv run pre-commit run --all-files
 ```
 
 Lint all files in the current directory:
 
 ```sh
-ruff check
+uv run ruff check
 ```
 
 Format all files in the current directory:
 
 ```sh
-ruff format
+uv run ruff format
 ```
 
 ## Build
 
-Install the dependencies:
+If you didn't install the dependencies earlier, you can install only the build dependencies:
 
 ```sh
-pip install -e '.[build]'
+uv sync --only-group build
 ```
 
 Generate the distribution packages:
 
 ```sh
-python3 -m build
+uv build
 ```
 
-Upload all of the archives under `dist`:
+Upload all of the archives under `dist` to TestPyPI:
 
 ```sh
-twine upload --repository testpypi dist/*
+uv publish --publish-url https://test.pypi.org/legacy/
 ```
 
 Install the package:
 
 ```sh
-pip install --index-url https://test.pypi.org/simple/ --no-deps diffused
+uv tool install diffused --index-url https://test.pypi.org/simple/
 ```
 
 Bundle the package with [PyInstaller](https://pyinstaller.org/):
 
 ```sh
-pyinstaller src/diffused/cli.py --name diffused
+uv run pyinstaller src/diffused/cli.py --name diffused
 ```
 
 ## Docs
 
-Install the dependencies:
+If you didn't install the dependencies earlier, you can install only the docs dependencies:
 
 ```sh
-pip install -e '.[docs]'
+uv sync --only-group docs
 ```
 
 Generate the docs with [pdoc](https://pdoc.dev/):
 
 ```sh
-pdoc src/diffused/
+uv run pdoc src/diffused/
 ```
 
 ## Release

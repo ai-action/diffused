@@ -15,29 +15,41 @@ diffused <model> <prompt>
 [Text-to-image](https://huggingface.co/docs/diffusers/using-diffusers/conditional_image_generation):
 
 ```sh
+uv run --with diffused diffused segmind/tiny-sd "red apple"
+```
+
+Or with [pipx](https://pipx.pypa.io/):
+
+```sh
 pipx run diffused segmind/tiny-sd "red apple"
 ```
 
 [Image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img):
 
 ```sh
-pipx run diffused OFA-Sys/small-stable-diffusion-v0 "cat wizard" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png
+uv run --with diffused diffused OFA-Sys/small-stable-diffusion-v0 "cat wizard" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png
 ```
 
 [Inpainting](https://huggingface.co/docs/diffusers/en/using-diffusers/inpaint):
 
 ```sh
-pipx run diffused kandinsky-community/kandinsky-2-2-decoder-inpaint "black cat" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint.png --mask-image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint_mask.png
+uv run --with diffused diffused kandinsky-community/kandinsky-2-2-decoder-inpaint "black cat" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint.png --mask-image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint_mask.png
 ```
 
 ## Prerequisites
 
 - [Python](https://www.python.org/)
-- [pipx](https://pipx.pypa.io/)
+- [uv](https://docs.astral.sh/uv/) or [pipx](https://pipx.pypa.io/)
 
 ## CLI
 
-Install the CLI:
+Install the CLI with [uv](https://docs.astral.sh/uv/):
+
+```sh
+uv tool install diffused
+```
+
+Or with [pipx](https://pipx.pypa.io/):
 
 ```sh
 pipx install diffused
@@ -45,7 +57,7 @@ pipx install diffused
 
 ### `model`
 
-**Required** (*str*): The diffusion [model](https://huggingface.co/models).
+**Required** (_str_): The diffusion [model](https://huggingface.co/models).
 
 ```sh
 diffused segmind/SSD-1B "An astronaut riding a green horse"
@@ -55,7 +67,7 @@ See [segmind/SSD-1B](https://huggingface.co/segmind/SSD-1B).
 
 ### `prompt`
 
-**Required** (*str*): The text prompt.
+**Required** (_str_): The text prompt.
 
 ```sh
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eating sushi with a cat in a izakaya, 35mm photograph, film, professional, 4k, highly detailed"
@@ -63,7 +75,7 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cinematic photo of Godzilla eati
 
 ### `--negative-prompt`
 
-**Optional** (*str*): What to exclude from the output image.
+**Optional** (_str_): What to exclude from the output image.
 
 ```sh
 diffused stabilityai/stable-diffusion-2 "photo of an apple" --negative-prompt="blurry, bright photo, red"
@@ -77,7 +89,7 @@ diffused stabilityai/stable-diffusion-2 "photo of an apple" -np="blurry, bright 
 
 ### `--image`
 
-**Optional** (*str*): The input image path or URL. The initial image is used as a starting point for an [image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img) diffusion process.
+**Optional** (_str_): The input image path or URL. The initial image is used as a starting point for an [image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img) diffusion process.
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in a desert" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/img2img-init.png
@@ -91,7 +103,7 @@ diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in a desert" -i=
 
 ### `--mask-image`
 
-**Optional** (*str*): The mask image path or URL. [Inpainting](https://huggingface.co/docs/diffusers/en/using-diffusers/inpaint) replaces or edits specific areas of an image. [Create a mask image](https://huggingface.co/docs/diffusers/en/using-diffusers/inpaint#create-a-mask-image) to inpaint images.
+**Optional** (_str_): The mask image path or URL. [Inpainting](https://huggingface.co/docs/diffusers/en/using-diffusers/inpaint) replaces or edits specific areas of an image. [Create a mask image](https://huggingface.co/docs/diffusers/en/using-diffusers/inpaint#create-a-mask-image) to inpaint images.
 
 ```sh
 diffused kandinsky-community/kandinsky-2-2-decoder-inpaint "black cat" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint.png --mask-image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/inpaint_mask.png
@@ -105,7 +117,7 @@ diffused kandinsky-community/kandinsky-2-2-decoder-inpaint "black cat" -i=inpain
 
 ### `--output`
 
-**Optional** (*str*): The output image filename.
+**Optional** (_str_): The output image filename.
 
 ```sh
 diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" --output=cat.jpg
@@ -119,7 +131,7 @@ diffused dreamlike-art/dreamlike-photoreal-2.0 "cat eating sushi" -o=cat.jpg
 
 ### `--width`
 
-**Optional** (*int*): The output image width in pixels.
+**Optional** (_int_): The output image width in pixels.
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --width=1024
@@ -133,7 +145,7 @@ diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -W=1024
 
 ### `--height`
 
-**Optional** (*int*): The output image height in pixels.
+**Optional** (_int_): The output image height in pixels.
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" --height=1024
@@ -147,7 +159,7 @@ diffused stabilityai/stable-diffusion-xl-base-1.0 "dog in space" -H=1024
 
 ### `--number`
 
-**Optional** (*int*): The number of output images. Defaults to 1.
+**Optional** (_int_): The number of output images. Defaults to 1.
 
 ```sh
 diffused segmind/tiny-sd apple --number=2
@@ -161,7 +173,7 @@ diffused segmind/tiny-sd apple -n=2
 
 ### `--guidance-scale`
 
-**Optional** (*int*): How much the prompt influences the output image. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
+**Optional** (_int_): How much the prompt influences the output image. A lower value leads to more deviation and creativity, whereas a higher value follows the prompt to a tee.
 
 ```sh
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" --guidance-scale=7.5
@@ -175,7 +187,7 @@ diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut in a jungle" -gs
 
 ### `--inference-steps`
 
-**Optional** (*int*): The number of diffusion steps used during image generation. The more steps you use, the higher the quality, but the generation time will increase.
+**Optional** (_int_): The number of diffusion steps used during image generation. The more steps you use, the higher the quality, but the generation time will increase.
 
 ```sh
 diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" --inference-steps=50
@@ -189,7 +201,7 @@ diffused CompVis/stable-diffusion-v1-4 "astronaut rides horse" -is=50
 
 ### `--strength`
 
-**Optional** (*float*): The noise added to the input image, which determines how much the output image deviates from the original image. Strength is used for [image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img#strength) and [inpainting](https://huggingface.co/docs/diffusers/using-diffusers/inpaint#strength) tasks and is a multiplier to the number of denoising steps (`--inference-steps`).
+**Optional** (_float_): The noise added to the input image, which determines how much the output image deviates from the original image. Strength is used for [image-to-image](https://huggingface.co/docs/diffusers/using-diffusers/img2img#strength) and [inpainting](https://huggingface.co/docs/diffusers/using-diffusers/inpaint#strength) tasks and is a multiplier to the number of denoising steps (`--inference-steps`).
 
 ```sh
 diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in swamp" --image=https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/img2img-sdxl-init.png --strength=0.5
@@ -203,7 +215,7 @@ diffused stabilityai/stable-diffusion-xl-refiner-1.0 "astronaut in swamp" -i=ima
 
 ### `--seed`
 
-**Optional** (*int*): The seed for generating random numbers, ensuring [reproducibility](https://huggingface.co/docs/diffusers/using-diffusers/reusing_seeds) in image generation pipelines.
+**Optional** (_int_): The seed for generating random numbers, ensuring [reproducibility](https://huggingface.co/docs/diffusers/using-diffusers/reusing_seeds) in image generation pipelines.
 
 ```sh
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "Labrador in the style of Vermeer" --seed=0
@@ -217,7 +229,7 @@ diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "Labrador in the style of V
 
 ### `--device`
 
-**Optional** (*str*): The [device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
+**Optional** (_str_): The [device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) to accelerate the computation (`cpu`, `cuda`, `mps`, `xpu`, `xla`, or `meta`).
 
 ```sh
 diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" --device=cuda
@@ -231,7 +243,7 @@ diffused stable-diffusion-v1-5/stable-diffusion-v1-5 "astronaut on earth, 8k" -d
 
 ### `--no-safetensors`
 
-**Optional** (*bool*): Whether to disable [safetensors](https://huggingface.co/docs/diffusers/main/en/using-diffusers/using_safetensors).
+**Optional** (_bool_): Whether to disable [safetensors](https://huggingface.co/docs/diffusers/main/en/using-diffusers/using_safetensors).
 
 ```sh
 diffused runwayml/stable-diffusion-v1-5 "astronaut on mars" --no-safetensors
@@ -255,22 +267,10 @@ diffused --help # diffused -h
 
 ## Script
 
-Create a virtual environment:
+Create a virtual environment and install the package with [uv](https://docs.astral.sh/uv/):
 
 ```sh
-python3 -m venv .venv
-```
-
-Activate the virtual environment:
-
-```sh
-source .venv/bin/activate
-```
-
-Install the package:
-
-```sh
-pip install diffused
+uv add diffused
 ```
 
 Generate an image with a [model](https://huggingface.co/segmind/tiny-sd) and a prompt:
@@ -286,7 +286,7 @@ images[0].save("apple.png")
 Run the script:
 
 ```sh
-python script.py
+uv run python script.py
 ```
 
 Open the image:

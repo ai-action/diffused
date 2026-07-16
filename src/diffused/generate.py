@@ -78,7 +78,10 @@ def generate(**kwargs: Unpack[Generate]) -> list[Image.Image]:
         )
         Pipeline = diffusers.AutoPipelineForInpainting
 
-    pipeline = Pipeline.from_pretrained(kwargs.get("model"))
+    pipeline = Pipeline.from_pretrained(
+        kwargs.get("model"),
+        torch_dtype=torch.float32,
+    )
 
     device = kwargs.get("device")
     if device:
