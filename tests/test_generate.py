@@ -19,7 +19,7 @@ def test_text_to_image(mock_from_pretrained: Mock) -> None:
     images = generate(model=model, prompt=prompt)
     assert len(images) == 1
     assert isinstance(images[0], Mock)
-    mock_from_pretrained.assert_called_once_with(model)
+    mock_from_pretrained.assert_called_once_with(model, torch_dtype=ANY)
     Pipeline.mock.assert_called_once_with(**pipeline_args)
     Pipeline.to.assert_not_called()
 
@@ -41,7 +41,7 @@ def test_text_to_image_with_arguments(mock_from_pretrained: Mock) -> None:
     images = generate(model=model, device=device, **pipeline_args)
     assert len(images) == 2
     assert isinstance(images[0], Mock)
-    mock_from_pretrained.assert_called_once_with(model)
+    mock_from_pretrained.assert_called_once_with(model, torch_dtype=ANY)
     Pipeline.mock.assert_called_once_with(**pipeline_args)
     Pipeline.to.assert_called_once_with(device)
 
@@ -64,7 +64,7 @@ def test_text_to_image_with_seed(
     images = generate(model=model, device=device, seed=seed, **pipeline_args)
     assert len(images) == 1
     assert isinstance(images[0], Mock)
-    mock_from_pretrained.assert_called_once_with(model)
+    mock_from_pretrained.assert_called_once_with(model, torch_dtype=ANY)
     mock_generator.assert_called_once_with(device=device)
     pipeline_args["generator"] = ANY
     Pipeline.mock.assert_called_once_with(**pipeline_args)
@@ -92,7 +92,7 @@ def test_arguments_with_zero_values(
     images = generate(model=model, seed=seed, **pipeline_args)
     assert len(images) == 1
     assert isinstance(images[0], Mock)
-    mock_from_pretrained.assert_called_once_with(model)
+    mock_from_pretrained.assert_called_once_with(model, torch_dtype=ANY)
     mock_generator.assert_called_once_with(device=None)
     pipeline_args["generator"] = ANY
     Pipeline.mock.assert_called_once_with(**pipeline_args)
@@ -116,7 +116,7 @@ def test_image_to_image(mock_from_pretrained: Mock, mock_load_image: Mock) -> No
     images = generate(model=model, prompt=prompt, image=image)
     assert len(images) == 1
     assert isinstance(images[0], Mock)
-    mock_from_pretrained.assert_called_once_with(model)
+    mock_from_pretrained.assert_called_once_with(model, torch_dtype=ANY)
     mock_load_image.assert_called_once_with(image)
     Pipeline.mock.assert_called_once_with(**pipeline_args)
     Pipeline.to.assert_not_called()
@@ -140,7 +140,7 @@ def test_inpainting(mock_from_pretrained: Mock, mock_load_image: Mock) -> None:
     images = generate(model=model, prompt=prompt, image=image, mask_image=mask_image)
     assert len(images) == 1
     assert isinstance(images[0], Mock)
-    mock_from_pretrained.assert_called_once_with(model)
+    mock_from_pretrained.assert_called_once_with(model, torch_dtype=ANY)
     mock_load_image.assert_has_calls([call(image), call(mask_image)])
     Pipeline.mock.assert_called_once_with(**pipeline_args)
     Pipeline.to.assert_not_called()
