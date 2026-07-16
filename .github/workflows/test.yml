@@ -9,25 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Use Python
-        uses: actions/setup-python@v6
-        with:
-          cache: pip
-          python-version-file: pyproject.toml
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
 
       - name: Install dependencies
-        run: pip install -e .[test]
+        run: uv sync --only-group test
 
       - name: Run tests and collect coverage
         run: |
-          coverage run -m pytest
-          coverage report
-          coverage xml
+          uv run coverage run -m pytest
+          uv run coverage report
+          uv run coverage xml
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -35,16 +32,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Use Python
-        uses: actions/setup-python@v6
-        with:
-          cache: pip
-          python-version-file: pyproject.toml
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
 
       - name: Install package
-        run: pipx install .
+        run: uv tool install .
 
       - name: Check version
         run: |
@@ -78,22 +72,19 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Cache models
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.cache/huggingface/
           key: ${{ runner.os }}-huggingface
 
-      - name: Use Python
-        uses: actions/setup-python@v6
-        with:
-          cache: pip
-          python-version-file: pyproject.toml
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
 
       - name: Install package
-        run: pipx install .
+        run: uv tool install .
 
       - name: Generate image
         run: diffused segmind/tiny-sd ${{ matrix.test.args }}
@@ -101,7 +92,7 @@ jobs:
           DO_NOT_TRACK: 1
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.test.task }}-${{ hashFiles('**/*.jpg', '**/*.png') }}
           path: |

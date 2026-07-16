@@ -2,12 +2,12 @@
 name = "diffused"
 version = "1.0.1"
 description = "Generate images with diffusion models."
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
-    "accelerate>=1.5.0",
-    "diffusers>=0.32.0",
-    "torch>=2.6.0",
-    "transformers>=4.50.0",
+    "accelerate>=1.14.0",
+    "diffusers>=0.39.0",
+    "torch>=2.13.0",
+    "transformers>=5.14.0",
 ]
 authors = [
     { name="Mark", email="mark@remarkablemark.org" },
@@ -47,24 +47,23 @@ diffused = "diffused.cli:main"
 [project.entry-points."pipx.run"]
 diffused = "diffused.cli:main"
 
-[project.optional-dependencies]
+[dependency-groups]
 build = [
-    "build==1.4.0",
-    "pyinstaller==6.18.0",
-    "twine==6.2.0",
+    "build==1.5.0",
+    "pyinstaller==6.21.0",
 ]
 docs = [
     "pdoc==16.0.0",
 ]
 lint = [
-    "black==25.12.0",
-    "isort==7.0.0",
-    "pre-commit==4.5.1",
-    "ruff==0.14.13",
+    "black==26.5.1",
+    "isort==8.0.1",
+    "pre-commit==4.6.0",
+    "ruff==0.15.21",
 ]
 test = [
-    "coverage==7.13.1",
-    "pytest==9.0.2",
+    "coverage==7.15.2",
+    "pytest==9.1.1",
 ]
 
 [project.urls]
@@ -82,3 +81,10 @@ omit = [
     # omit pytorch-generated files in /tmp
     "/tmp/*",
 ]
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
