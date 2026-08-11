@@ -59,7 +59,7 @@ lint = [
     "black==26.5.1",
     "isort==8.0.1",
     "pre-commit==4.6.1",
-    "ruff==0.16.1",
+    "ruff==0.16.2",
 ]
 test = [
     "coverage==7.15.4",
